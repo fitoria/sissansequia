@@ -1,0 +1,7 @@
+{% extends 'index.html' %}
+
+{% block content %}
+Números de casos: {{ casos }} familias
+<div class="titulografo"><h2>Gráficos Estado de Nutrición</h2></div>
+<img src={{url}} /> <img src={{url1}} /> 
+{% endblock %}

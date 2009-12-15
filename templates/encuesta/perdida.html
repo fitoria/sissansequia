@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{%block tab%}'tabs-6'{%endblock%}
+{% block contenido %}
+
+<div class="titulografo"><h2>Perdida de Primera, Postrera y Apante</h2></div>
+numeros de casos: {{casos}} familias   <div id="vergrafo" class="derecha"><a href="/sequia/perdida/grafos/">Ver Gráficos</a></div><br>
+
+<table>
+<caption>Tabla Perdida de Primera</caption>
+<thead>
+         <tr>
+				 <th>Areas</th>
+				 <th>Maíz</th>
+                 <th>Frijol</th>
+                 <th>Sorgo</th>
+         </tr>
+   </thead>
+<tr>
+				 <td>Area Sembrada (Mz)</td>
+                 <td>{{ maiz_sembrada }}</td>
+                 <td>{{ frijol_sembrada }}</td>
+				 <td>{{ arroz_sembrada }}</td>
+</tr>
+<tr>
+				 <td>Area Cosechada (Mz)</td>
+                 <td>{{ maiz_cosechada }}</td>
+                 <td>{{ frijol_cosechada }}</td>
+				 <td>{{ arroz_cosechada }}</td>
+</tr>
+<tr>
+				 <td>Area Perdida (Mz)</td>
+                 <td>{{ maiz_perdida }}</td>
+                 <td>{{ frijol_perdida }}</td>
+				 <td>{{ arroz_perdida }}</td>
+</tr>
+<tr>
+				 <td>Producción (qq)</td>
+                 <td>{{ maiz_produccion }}</td>
+                 <td>{{ frijol_produccion }}</td>
+				 <td>{{ arroz_produccion }}</td>
+</tr>
+<tr>
+				 <td>Rendimiento(qq/Mz)</td>
+                 <td>{{ maiz_rendi|floatformat:2 }}</td>
+                 <td>{{ frijol_rendi|floatformat:2 }}</td>
+				 <td>{{ arroz_rendi|floatformat:2 }}</td>
+</tr>
+</table>
+<table>
+<caption>Tabla Perdida de Postrera</caption>
+<thead>
+         <tr>
+				 <th>Areas</th>
+				 <th>Maíz</th>
+                 <th>Frijol</th>
+                 <th>Sorgo</th>
+         </tr>
+   </thead>
+<tr>
+				 <td>Area Sembrada (Mz)</td>
+                 <td>{{ maiz_sembrada_P }}</td>
+                 <td>{{ frijol_sembrada_P }}</td>
+				 <td>{{ arroz_sembrada_P }}</td>
+</tr>
+<tr>
+				 <td>Area Cosechada (Mz)</td>
+                 <td>{{ maiz_cosechada_P }}</td>
+                 <td>{{ frijol_cosechada_P }}</td>
+				 <td>{{ arroz_cosechada_P }}</td>
+</tr>
+<tr>
+				 <td>Area Perdida (Mz)</td>
+                 <td>{{ maiz_perdida_P }}</td>
+                 <td>{{ frijol_perdida_P }}</td>
+				 <td>{{ arroz_perdida_P }}</td>
+</tr>
+<tr>
+				 <td>Producción (qq)</td>
+                 <td>{{ maiz_produccion_P }}</td>
+                 <td>{{ frijol_produccion_P }}</td>
+				 <td>{{ arroz_produccion_P }}</td>
+</tr>
+<tr>
+				 <td>Rendimiento(qq/Mz)</td>
+                 <td>{{ maiz_rendi_P|floatformat:2 }}</td>
+                 <td>{{ frijol_rendi_P|floatformat:2 }}</td>
+				 <td>{{ arroz_rendi_P|floatformat:2 }}</td>
+</tr>
+</table>
+{% endblock %}

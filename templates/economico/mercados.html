@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{%block tab%}'tabs-3'{%endblock%}
+{% block contenido %}
+{{mensaje}}
+<script type="text/javascript">
+$(document).ready(function () {
+    var departamento = document.getElementById("id_departamento");
+    var municipio = document.getElementById("id_municipio");
+    $("#id_departamento").change(function () {
+      var index = departamento.options.selectedIndex;
+      var id = departamento.options[index].value;
+      $.getJSON("/ajax/municipio/" + id +"/",
+      function(data){
+        municipio.options.length = 0;
+        //municipio.options[0] = new Option("--------");
+        for(i=0; i< data.length; i++){
+          municipio.options[i+1] = new Option(data[i][1], data[i][0]);
+        }
+      });
+    });
+});
+function procesarFormulario(form){
+    var dept = form.departamento.value;
+    var muni = form.municipio.value;
+    if (dept && muni){
+        var url = "/economico/mercados/municipio/" + muni + "/";
+    }else if(dept){
+        var url = "/economico/mercados/departamento/" + dept + "/";
+    }else{
+        var url="/economico/mercados/";
+    }
+    window.location = url;
+}
+</script>
+<form name="formulario" id="id_formulario" action="" method="GET">
+    Departamentos: 
+    <select id="id_departamento" name="departamento">
+        <option selected="selected"  value="">------</option>
+        {%for dept in departamentos%}
+        <option value="{{dept.id}}">{{dept.nombre}}</option>
+        {%endfor%}
+    </select>
+    Municipios: 
+    <select id="id_municipio" name="municipio">
+        <option selected="selected"  value="">------</option>
+    </select>
+        <input type="button" name="boton" id="id_boton" value="Filtrar"  onClick="procesarFormulario(this.form)"/>
+</form>
+<table>
+    <tr>
+        <th class="sortable-numeric">
+            Año
+        </th>
+        <th class="sortable-numeric">
+          Departamento 
+        </th>
+        <th class="sortable-numeric">
+           Municipio 
+        </th>
+        <th class="sortable-numeric">
+          Nombre 
+        </th>
+        <th class="sortable-numeric">
+          Ubicación 
+        </th>
+    </tr>
+    {%for mercado in mercados%}
+    <tr class="{%cycle alt, none%}">
+        <td>
+            {{mercado.ano}}
+        </td>
+        <td>
+            <a href="/economico/mercados/departamento/{{mercado.departamento.slug}}/">{{mercado.departamento.nombre}}</a>
+        </td>
+        <td>
+            <a href="/economico/mercados/municipio/{{mercado.municipio.slug}}/">{{mercado.municipio.nombre}}</a>
+        </td>
+        <td>
+            {{mercado.nombre}}
+        </td>
+        <td>
+            {{mercado.ubicacion}}
+        </td>
+    </tr>
+    {%endfor%}
+</table>
+{% endblock %}

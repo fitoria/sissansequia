@@ -1,0 +1,31 @@
+### APP LUGAR
+
+-----Departamentos
+LOAD DATA LOCAL INFILE '/home/zerocool/django/gissan/sissan/db/cvs/departamentos.csv' INTO TABLE lugar_departamento FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' ( nombre,numero, extension);
+
+-----Municipios
+LOAD DATA LOCAL INFILE '/home/zerocool/django/gissan/sissan/db/cvs/municipios.csv' INTO TABLE lugar_municipio FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' ( departamento_id,nombre,numero);
+
+### APP Demografico
+
+-----Poblacion
+LOAD DATA LOCAL INFILE '/home/zerocool/django/gissan/sissan/db/cvs/poblacion.csv' INTO TABLE demografico_poblacion FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' ( ano,departamento_id,total_ambos_sexos,total_hombre,total_mujer,urbano_ambos_sexos,urbano_hombre,urbano_mujer,rural_ambos_sexos,rural_hombre,rural_mujer);
+
+### APP Socio Demografico
+
+-----Mortalidad materna
+LOAD DATA LOCAL INFILE '/home/zerocool/django/gissan/sissan/db/cvs/mortalidad_materna.csv' INTO TABLE socio_demografico_mortalidad_materna FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' ( ano,mortalidad);
+
+-----Mortalidad infantil
+LOAD DATA LOCAL INFILE '/home/zerocool/django/gissan/sissan/db/cvs/mortalidad_infantil.csv' INTO TABLE socio_demografico_mortalidad_infantil FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' ( ano,mortalidad,mortalidad_menor);
+
+-----Crecimiento
+-----Esperanza
+-----Fecundidad
+
+
+### APP Economico
+
+-------Exportacion
+LOAD DATA LOCAL INFILE '/home/zerocool/django/gissan/sissan/db/cvs/fob.csv' INTO TABLE economico_exportacion FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n' ( ano,mes,fob);
+

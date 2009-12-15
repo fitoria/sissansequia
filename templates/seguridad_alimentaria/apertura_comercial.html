@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{%block tab%}'tabs-5'{%endblock%}
+{%block extrahead%}
+<script type="text/javascript">
+$(document).ready(function(){
+var flip = 0;
+var cadena = window.location.pathname.split("/");
+var tope = cadena.length - 2;
+var parametros = '/';
+for(i=3; i<=tope; i++)
+{
+    parametros+= cadena[i] + "/";
+}
+var url = "/" + cadena[1] + "/grafo/" + cadena[2] + parametros;
+$("#boton-grafo").click(function () { 
+    $.getJSON(url, 
+       function(data){
+           if(flip++ % 2 == 0){
+               $("#grafo").replaceWith('<div id="grafo"><img src="' + data.url + '" /></div>');
+           }else{
+               $("#grafo").replaceWith('<div id="grafo"></div>');
+           }
+       });
+   });   
+});
+</script>
+{%endblock%}
+{% block contenido %}
+<script type="text/javascript">
+    function procesarFormulario(form){
+        var ano_inicial = form.ano_inicial.value;
+        var ano_final = form.ano_final.value;
+
+        if (ano_inicial && ano_final){
+            var url = "/seguridad-alimentaria/apertura-comercial/" + ano_inicial + "-" + ano_final + "/";
+        }else if(ano_inicial){
+            var url = "/seguridad-alimentaria/apertura-comercial/" + ano_inicial + "/";
+        }else{
+            var url = "/seguridad-alimentaria/apertura-comercial/";
+        }
+        window.location = url;
+    }
+</script>
+<form id="id_formulario" name="formulario" method="GET" action="">
+    Año Inicial: 
+    <select id="id_ano_inicial" name="ano_inicial">
+        <option value="">-----</option>
+        {%for ano in anos%}
+        <option value="{{ano}}">{{ano}}</option>
+        {%endfor%}
+    </select>
+    Año Final:
+    <select id="id_ano_final" name="ano_final">
+        <option value="">-----</option>
+        {%for ano in anos reversed%}
+        <option value="{{ano}}">{{ano}}</option>
+        {%endfor%}
+    </select>
+    <input type="button" value="Filtrar" onClick="procesarFormulario(this.form)"/>
+</form>
+<div id="boton-grafo"><a href="#">Gráfico</a></div>
+<div id="grafo"></div>
+{{mensaje}}
+<table>
+    <tr>
+        <th class="sortable-numeric">
+            Año
+        </th>
+        <th class="sortable-numeric">
+            Tasa
+        </th>
+    </tr>
+    {%for dato in resultados reversed%}
+    <tr>
+        <td class="{% cycle alt, none%}">
+            <a href="/seguridad-alimentaria/apertura-comercial/{{dato.ano}}"/>{{dato.ano}} </a>
+        </td>
+        <td class="{% cycle alt, none%}">
+            {{dato.tasa|floatformat:2}}
+        </td>
+    </tr>
+    {%endfor%}
+    <tfoot>
+    <tr>
+        <td>
+            Variación
+        </td>
+        <td>
+            {{variacion|floatformat:2}}%
+        </td>
+    </tr>
+</tfoot>
+</table>
+{% endblock %}

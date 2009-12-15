@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{%block tab%}'tabs-5'{%endblock%}
+{%block extrahead%}
+<script type="text/javascript">
+$(document).ready(function(){
+var flip = 0;
+var cadena = window.location.pathname.split("/");
+var tope = cadena.length - 2;
+var parametros = '/';
+for(i=3; i<=tope; i++)
+{
+    parametros+= cadena[i] + "/";
+}
+var url = "/" + cadena[1] + "/grafo/" + cadena[2] + parametros;
+$("#boton-grafo").click(function () { 
+    $.getJSON(url, 
+       function(data){
+           if(flip++ % 2 == 0){
+               $("#grafo").replaceWith('<div id="grafo"><img src="' + data.url + '" /></div>');
+           }else{
+               $("#grafo").replaceWith('<div id="grafo"></div>');
+           }
+       });
+   });   
+});
+</script>
+{%endblock%}
+{% block contenido %}
+<script type="text/javascript">
+    function procesarFormulario(form){
+        var ano_inicial = form.ano_inicial.value;
+        var ano_final = form.ano_final.value;
+        var departamento  = form.departamento.value;
+
+        if (ano_inicial && ano_final){
+            if (departamento){
+                var url = "/seguridad-alimentaria/utilizacion-biologica/" + ano_inicial + "-" + ano_final + "/" + departamento + "/";
+            }else{
+                var url = "/seguridad-alimentaria/utilizacion-biologica/" + ano_inicial + "-" + ano_final + "/";
+            }
+        }else if(ano_inicial){
+            if (departamento){
+                var url = "/seguridad-alimentaria/utilizacion-biologica/" + ano_inicial +  "/" + departamento + "/";
+            }else{
+                var url = "/seguridad-alimentaria/utilizacion-biologica/" + ano_inicial + "/";
+            }
+        }else{
+            if (departamento){
+                var url = "/seguridad-alimentaria/utilizacion-biologica/" + departamento + "/";
+            }else{
+                var url = "/seguridad-alimentaria/utilizacion-biologica/";
+            }
+        }
+        window.location = url;
+    }
+</script>
+<form id="id_formulario" name="formulario" method="GET" action="">
+    Año Inicial: 
+    <select id="id_ano_inicial" name="ano_inicial">
+        <option value="">-----</option>
+        {%for ano in anos%}
+        <option value="{{ano}}">{{ano}}</option>
+        {%endfor%}
+    </select>
+    Año Final:
+    <select id="id_ano_final" name="ano_final">
+        <option value="">-----</option>
+        {%for ano in anos reversed%}
+        <option value="{{ano}}">{{ano}}</option>
+        {%endfor%}
+    </select>
+    Departamento:
+    <select id="id_departamento" name="departamento">
+        {%for departamento in departamentos%}
+        <option value="{{departamento.slug}}">{{departamento.nombre}}</option>
+        {%endfor%}
+    </select>
+    <input type="button" value="Filtrar" onClick="procesarFormulario(this.form)"/>
+</form>
+<div id="boton-grafo"><a href="#">Gráfico</a></div>
+<div id="grafo"></div>
+{{mensaje}}
+<table>
+    <tr>
+        <th class="sortable-numeric">
+            Año
+        </th>
+        {% if departamento %}
+        <td>
+          Departamento 
+        </td>
+        {% endif %}
+        <th class="sortable-numeric">
+          Enfermedades diarreicas agudas 
+        </th>
+        <th class="sortable-numeric">
+          Enfermedades respiratorias agudas
+        </th>
+    </tr>
+    {%for dato in datos%}
+    <tr>
+        <td class="{% cycle alt, none%}">
+            {{dato.ano}}
+        </td>
+        {% if departamento %}
+        <td class="{% cycle alt, none%}">
+            <a href="/seguridad-alimentaria/utilizacion-biologica/{{dato.departamento.slug}}/">{{dato.departamento.nombre}}</a>
+        </td>
+        {% endif %}
+        <td class="{% cycle alt, none%}">
+            {{dato.enfermedades_diarreicas}}
+        </td>
+        <td class="{% cycle alt, none%}">
+            {{dato.enfermedades_respiratorias}}
+        </td>
+    </tr>
+    {%endfor%}
+    <tfoot>
+    <tr>
+        {%if departamento%}
+        <td colspan="2">
+        {%else%}
+        <td>
+        {%endif%}
+            Variaciones
+        </td>
+        <td>
+            {{variaciones.variacion_eda|floatformat:2}}%
+        </td>
+        <td>
+            {{variaciones.variacion_ira|floatformat:2}}%
+        </td>
+    </tr>
+    </tfoot>
+</table>
+{% endblock %}

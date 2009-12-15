@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//w3c//DTD XHTML 1.0 Strict//EN"
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<link rel="shortcut icon" href="/favicon.ico" />
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<title>{% block title %}Sondeo de Sequia{% endblock %}</title>
+	<meta http-equiv="Content-Style-Type" content="text/css" />
+
+	<link rel="stylesheet" href="/media/css/style.css" />
+	<script type="text/javascript" src="/media/js/jquery.js"></script>
+	<script type="text/javascript" src="/media/js/s3Slider.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#slider1').s3Slider({
+            timeOut: 4000 
+        });
+    });
+</script>
+{% block extraheader %}
+{% endblock %}
+{% block extra_js %}
+{% endblock %}
+</head>
+<body>
+
+		<div id="header"> <!-- empieza el header -->
+		<img src="/media/imagen/gpae31.jpg" width=570 height=78 alt="gpae"/>       
+		</div> <!-- termina el header --> 
+
+<div id="page-wrap">  <!-- empieza wrap -->
+<hr></hr>
+{% block menu %} 
+<ul class="nav-menu">
+    <li><a href="/">Inicio</a></li>
+    <li><a href="/index">Consultar</a></li>
+    <li><a href="/admin">Administración</a></li>
+</ul>
+{% endblock %}
+<br>
+<hr></hr>
+        <div id="main-content"> <!-- empieza main-content -->
+            {% block content %}
+			<div id="slider1">
+				<ul id="slider1Content">
+					<li class="slider1Image">
+						<a href=""><img src="/media/imagen/frijol.jpg" alt="frijol"/></a>
+						<span class="bottom"><strong>El Frijol</strong><br />Es una planta originaria de América que se cultiva en todo el mundo. Existen numerosas variedades y de ellas se consumen tanto las vainas verdes (judía verde o chauchas) como los granos secos.</span></li>
+					<li class="slider1Image">
+          					<img src="/media/imagen/maiz.jpg" alt="maiz"/>
+          					<span class="bottom"><strong>El Maíz</strong><br />Es una gramínea anual originaria de las Américas introducida en Europa en el siglo XVI. Actualmente, es el cereal con mayor volumen de producción en el mundo, superando al trigo y el arroz. En la mayor parte de los países de América, el maíz constituye la base histórica de la alimentación regional y uno de los aspectos centrales de la cultura mesoamericana.</span>
+      				</li>
+					<li class="slider1Image">
+          					<img src="/media/imagen/sorgo1.jpg" alt="sorgo"/>
+          					<span class="bottom"><strong>El Sorgo</strong><br />Género botánico de unas 20 especies de gramíneas oriundas de las regiones tropicales y subtropicales de África oriental.Se cultivan en su zona de origen, Europa, América y Asia como cereal para consumo humano, animal, en la producción de forrajes, y para la elaboración de bebidas alcohólicas. Su resistencia a la sequía y el calor lo hace un cultivo importante en regiones áridas, y es uno de los cultivos alimentarios más importantes del mundo.</span></li>
+      				<div class="clear slider1Image"></div>
+   				</ul>
+			</div>
+            {% endblock %}
+            <div id="footer">
+                  <p><a href="http://www.simas.org.ni">SIMAS 2009</a></p>
+            </div>
+        </div> <!-- termina el main-content -->
+
+</div> <!-- termina wrap -->
+
+</body>
+
+</html>

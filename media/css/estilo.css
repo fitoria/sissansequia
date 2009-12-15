@@ -1,0 +1,456 @@
+/* --------------Comienza Generales-------------- */
+
+body {
+	background-color: #454545;
+	background-image: url(../imagen/fondo.jpg);
+	background-repeat: repeat-x;
+	font-family: 'Trebuchet MS', Helvetica, sans-serif;
+	font-size:14px;
+}
+
+p {
+	text-align:justify;
+}
+
+a img {
+	border-style:none;
+}
+
+h1 {
+	font-size:22px;
+	color:#fb8b00;
+	border-bottom-color:#fff46d;
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	background-color:#fefdd2;
+	padding-left:2px;
+}
+
+h2 {
+	font-size:18px;
+	color:#4d4d4d;
+	font-weight:bold;
+}
+
+.izq {
+	float:left;
+}
+
+.der {
+	float:right;
+}
+
+.centro {
+	margin: 0pt auto;
+	padding:0pt;
+}
+/* --------------Termina Generales-------------- */
+
+/* --------------Contenedor que centra todo el sitio-------------- */
+#contenedor {
+	width:960px;
+	margin-top:-7px;
+}
+
+/* --------------Comienza Header-------------- */
+
+#header {
+	width:960px;
+	height:214px;
+	background-image: url(../imagen/header.jpg);
+}
+
+#sesion{
+	width:960px;
+	height:45px;
+	text-align:right;
+	padding-right:10px;
+	padding-top:5px;
+}
+
+#sesion ul {
+	list-style:none;
+	margin:0;
+	padding:0;
+	float:right;
+}
+
+#sesion li {
+	margin-left:4px;
+	padding-left:8px;
+	padding-top:4px;
+	height:20px;
+	float:left;
+	background-image:url(../imagen/separador_menu.jpg);
+	background-repeat: no-repeat;
+	background-position:left;
+	}
+
+#sesion img {
+	float:left;
+	margin-right:2px;
+}
+
+#sesion a {
+	color:#FFFFFF;
+	text-decoration:none;
+}
+
+#sesion a:hover {
+	text-decoration:underline;
+	color:#eeeeee
+}
+
+#header_tab {
+	width:700px;
+	height:76px;
+}
+
+#enlace {
+	background-color: #454545;
+	color:#FFFFFF;
+	height:20px;
+	float:left;
+	margin-right:10px;
+	padding-left:5px;
+	padding-top:4px;
+	padding-right:5px;
+	border-left-width:1px;
+	border-left:solid;
+	border-left-color:#000000;
+}
+
+#enlace a {
+	color:#eeeeee;
+	text-decoration:none;
+}
+
+#sombra {
+	margin-top:4px;
+	width:960px;
+	height:18px;
+	background-image: url(../imagen/sombraheader.jpg);
+	background-repeat: no-repeat;
+	padding-left:10px;
+}
+
+/* --------------Termina Header-------------- */
+
+
+/* --------------Comienza contenido--------------- */
+#contenido{
+	min-width:956px;
+	!width:960px;
+	min-height:350px;
+	border-style:solid;
+	border-color:#1f1f1f;
+	border-width:2px;
+	border-bottom-width:2px;
+	border-top-width:0px;
+	background:#eeeeee;
+	color:#5d5d5d;
+}
+
+#colum_izq {
+	width:640px;
+	margin-left:25px;
+}
+
+#colum_der {
+	width:250px;
+	height:100%;
+	margin-right:15px;
+	padding-left:10px;
+	padding-top:5px;
+}
+
+#colum_der img {
+	margin-bottom:3px;
+}
+
+.bloque {
+	background-image: url(../imagen/bloque.jpg);
+	width:250px;
+	height:160px;
+	margin-bottom:15px;
+}
+
+#b_titulo{
+	font-size:20px;
+	padding-left:10px;
+	padding-top:3px;
+}
+
+#b_enlace{
+padding:15px;
+color:#D1CFCF;
+}
+
+#b_enlace a {
+	color:#D1CFCF;
+	text-decoration:none;
+}
+
+
+#separador {
+	clear:both;
+}
+
+/* --------------Esto no va por el momento-------------- */
+#contenido_inferior {
+	width:916px;
+	height:45px;
+	background-image: url(../imagen/contenido_inferior.jpg);
+	background-repeat: no-repeat;
+}
+
+/* --------------Termina contenido-------------- */
+
+/* --------------Comienza footer-------------- */
+
+#footer {
+	margin-top:15px;
+	width:960px;
+	height:236px;
+	margin-bottom:-8px;
+	!margin-bottom:0px;
+	color:#C4BFBF;
+}
+
+#simas {
+	width:200px;
+	!width:400px;
+	height:15px;
+	padding-left:635px;
+	!padding-left:550px;
+	padding-top:105px;
+	font-size:12px;
+	color:#3d3d3d;
+}
+
+#simas a {
+	color:#3d3d3d;
+	text-decoration:underline;
+	font-weight:bold;
+}
+
+/* Termina footer */
+
+
+/* CSS Especial para las tablas */
+
+caption {
+	padding: 0 0 5px 0;
+	margin:0 auto;
+	width:auto;
+	font: italic 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+	text-align: right;
+}
+
+table {
+	width:640px;
+}
+
+th{
+	font: bold 10px/22px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+	color: #4f6b72;
+	border-right: 1px solid #C1DAD7;
+	border-bottom: 1px solid #C1DAD7;
+	border-top: 1px solid #C1DAD7;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	text-align: left;
+	padding: 8px 12px 4px 12px;
+	background:url(../imagen/bg_header.jpg) no-repeat;
+	vertical-align:middle;
+}
+
+td.total{
+	border-top: 0;
+	border-left: 0;
+	border-right: 1px solid #C1DAD7;
+	background: none;
+	text-align:right;
+	font-weight:bold;
+	text-transform:uppercase;
+	letter-spacing:1px;
+}
+
+th.sortable,
+th.sortable-text,
+th.sortable-date,
+th.sortable-keep,
+th.sortable-date-dmy,
+th.sortable-numeric,
+th.sortable-currency,
+th.sortable-sortByTwelveHourTimestamp,
+th.sortable-sortIPAddress,
+th.sortable-sortEnglishLonghandDateFormat,
+th.sortable-sortScientificNotation,
+th.sortable-sortImage,
+th.sortable-sortFileSize,
+th.sortable-sortAlphaNumeric,
+th.sortable-sortEnglishDateTime{
+	cursor:pointer;
+	background: #CAE8EA url(../imagen/bg_header_sortable.jpg) no-repeat;
+	padding: 8px 12px 4px 16px;
+}
+
+th.forwardSort{
+	background:#CAE8EA url(../imagen/bg_header_down.jpg) no-repeat 0 0;
+}
+
+th.reverseSort{
+	background:#CAE8EA url(../imagen/bg_header_up.jpg) no-repeat 0 0;
+}
+
+table thead th.forwardSort a,
+table thead th.reverseSort a {
+	color:#000;
+	text-decoration:none;
+}
+
+/*
+These styles should be added when very long tables are expected
+th.sort-active {
+	background:#CAE8EA url(../media/bg_header_sorting.jpg) no-repeat 0 0;
+	cursor:wait;
+}
+
+th.sort-active a {
+	color:#a80000 !important;
+	cursor:wait;
+}
+*/
+
+th a {
+	text-decoration:none;
+	color: #4f6b72;
+	background:transparent;
+}
+
+td a {
+	text-decoration:none;
+	color:#239;
+	background:transparent;
+}
+
+td img {
+	margin:0 auto;
+	border:3px solid #ddd;
+}
+
+td a:hover {
+	color:#a84444;
+	border-bottom:1px dotted #a80000;
+	background:transparent;
+}
+
+td {
+	font: normal 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+	border-right: 1px solid #C1DAD7;
+	border-bottom: 1px solid #C1DAD7;
+	padding: 6px 12px 6px 12px;
+	color: #4f6b72;
+	background: #FFFFFF;
+}
+
+td.lft {
+	text-align:left;
+}
+
+tr.alt {
+	background: #F5FAFA;
+	color: #797268;
+}
+
+/* Poor old Internet Explorer 6 has a bug that means we can't use background images for the table rows
+   as it trys to download the image each and every time that it is used (which means a 1000 row table
+   will produce 1000 http requests for the image in question) */
+tr[class="alt"] td {
+	background: #F5FAFA url(../media/td_alt.jpg) no-repeat;
+}
+
+td[class~="alt"]{
+	background: #edf3f3 url(../media/col_alt.jpg) no-repeat !important;
+}
+
+/* Poor old Internet Explorer won't see the next two rules either as it doesn't get :first-child */
+tbody tr.alt td:first-child{
+	background: #F5FAFA url(../imagen/bullet2.gif) no-repeat;
+	font-weight:bold;
+}
+
+tbody tr td:first-child {
+	background: #fff url(../imagen/bullet1.gif) no-repeat;
+	font-weight:bold;
+}
+
+/* Image free rules for Internet Explorer < 7 */
+* html tr.alt td {
+	background-color:#F5FAFA;
+}
+
+* html tr td.alt,
+* html tr.alt td.alt {
+background-color:#edf3f3;
+}
+
+/* TERMINA CSS Especial para las tablas */
+
+/*  Esto es para el efecto de la fotos */
+#slider1 {
+    width: 700px;
+    height: 500px;
+    position: relative;
+	overflow: hidden; 
+}
+
+#slider1Content {
+    width: 700px; 
+    position: absolute;
+	top: 0;
+	margin-left: 0;
+}
+.slider1Image {
+    float: left;
+    position: relative;
+	display: none;
+}
+.slider1Image span {
+    position: absolute;
+	font: 10px/15px Arial, Helvetica, sans-serif;
+    padding: 10px 13px;
+    width: 646px;
+    background-color: #000;
+    filter: alpha(opacity=70);
+    -moz-opacity: 0.7;
+	-khtml-opacity: 0.7;
+    opacity: 0.7;
+    color: #fff;
+    display: none;
+}
+.clear {
+	clear: both;
+}
+.slider1Image span strong {
+    font-size: 12px;
+}
+.bottom {
+	bottom: 0;
+    left: 0;
+}
+.left {
+    top: 0;
+    left: 0;
+    width: 100px !important;
+    height: 395px;
+}
+ 
+.right {
+    right: 0;
+    bottom: 0;
+    width: 140px !important;
+    height: 392px;
+}
+ul { list-style-type: none;}

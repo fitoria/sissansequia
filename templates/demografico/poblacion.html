@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{%block tab%}'tabs-1'{%endblock%}
+{%block extrahead%}
+<script type="text/javascript">
+$(document).ready(function(){
+var flip = 0;
+var cadena = window.location.pathname.split("/");
+var tope = cadena.length - 2;
+var parametros = '/';
+for(i=3; i<=tope; i++)
+{
+    parametros+= cadena[i] + "/";
+}
+var url = "/demografico/grafo/poblacion" + parametros;
+$("#boton-grafo").click(function () { 
+    $.getJSON(url, 
+       function(data){
+           if(flip++ % 2 == 0){
+               $("#grafo").replaceWith('<div id="grafo"><img src="' + data.url + '" /></div>');
+           }else{
+               $("#grafo").replaceWith('<div id="grafo"></div>');
+           }
+       });
+   });   
+});   
+</script>
+{%endblock%}
+{% block contenido %}
+<script type="text/javascript">
+    function procesarFormulario(form){
+        var ano_inicial = form.ano_inicial.value;
+        var ano_final = form.ano_final.value;
+        var departamento = form.departamento.value;
+        if (ano_inicial && ano_final){
+            if (departamento){
+                var url = "/demografico/poblacion/" + ano_inicial + "-" + ano_final + "/" + departamento;
+            }else{
+                var url = "/demografico/poblacion/" + ano_inicial + "-" + ano_final;
+            }
+        }else if(ano_inicial){
+            if (departamento){
+                var url = "/demografico/poblacion/" + ano_inicial + "/" + departamento;
+            }else {
+                var url = "/demografico/poblacion/" + ano_inicial;
+            }
+        }else
+        {
+            if (departamento){
+                var url="/demografico/poblacion/" + departamento;
+            }else
+            {
+                var url="/demografico/poblacion/";
+            }
+        }
+        window.location = url;
+    }
+</script>
+<form name="formulario" action="" method="get">
+    Rango de años: <select id="id_ano_inicial" name="ano_inicial" > - 
+        <option value="">-------</option>
+        {%for ano in anos%}
+        <option value="{{ano}}">{{ano}}</option>
+        {%endfor%}
+    </select> - 
+    <select id="id_ano_final" name="ano_final" >
+        <option value="">-------</option>
+        {%for ano in anos reversed%}
+        <option value="{{ano}}">{{ano}}</option>
+        {%endfor%}
+    </select>
+    Departamento: 
+    <select id="id_departamento" name="departamento" >
+        <option value="">-------</option>
+        {%for dep in departamentos reversed%}
+        <option value="{{dep.slug}}">{{dep.nombre}}</option>
+        {%endfor%}
+    </select>
+
+    <input type="button" name="boton" value="Filtrar" onClick="procesarFormulario(this.form)"/>
+</form>
+<div id="boton-grafo"><a href="#">Gráfico</a></div>
+<div id="grafo"></div>
+{{mensaje}}
+<table>
+    <thead>
+    <tr>
+        <th class="sortable-numeric">Año</th>
+        {%if departamental%}
+        <th class="sortable-numeric">Departamento</th>
+        {%endif%}
+        <th class="sortable-numeric">Hombre Urbano</th>
+        <th class="sortable-numeric">Mujer Urbano</th>
+        <th class="sortable-numeric">Hombre Rural</th>
+        <th class="sortable-numeric">Mujer Rural</th>
+        <th class="sortable-numeric">Total Hombres</th>
+        <th class="sortable-numeric">Total Mujeres</th>
+    </tr>
+</thead>
+    {% for dato in datos reversed %}
+    <tr class="{% cycle alt, none %}">
+        <td><a href="/demografico/poblacion/{{dato.ano}}/">{{dato.ano}}</a></td>
+        {%if departamental%}
+        <td>{{dato.departamento}}</td>
+        {%endif%}
+        <td>{{dato.hombre_urbano}}</td>
+        <td>{{dato.mujer_urbano}}</td>
+        <td>{{dato.hombre_rural}}</td>
+        <td>{{dato.mujer_rural}}</td>
+        <td>{{dato.total_hombre}}</td>
+        <td>{{dato.total_mujer}}</td>
+    </tr>
+    {%endfor%}
+    <tfoot>
+        <tr class="{%cycle alt, none %}">
+        {%if departamental%}
+        <th colspan="2">Totales</td>
+        {%else%}
+        <th>Totales</td>
+        {%endif%}
+        <th>{{totales.hombre_urbano}}</th>
+        <th>{{totales.mujer_urbano}}</th>
+        <th>{{totales.hombre_rural}}</th>
+        <th>{{totales.mujer_rural}}</th>
+        <th>{{totales.total_hombre}}</th>
+        <th>{{totales.total_hombre}}</th>
+    </tr>
+    </tfoot>
+</table>
+{% endblock %}
+
+
+
+

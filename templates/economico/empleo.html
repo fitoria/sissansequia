@@ -1,0 +1,292 @@
+{% extends 'base.html' %}
+{%block tab%}'tabs-3'{%endblock%}
+{% block contenido %}
+<script type="text/javascript">
+    function procesarFormulario(form){
+        var ano_inicial = form.ano_inicial.value;
+        var ano_final= form.ano_final.value;
+
+        if (ano_final && ano_inicial)
+        {
+            var url = "/economico/empleo/" + ano_inicial + "-" + ano_final + "/";
+        }else if(ano_inicial){
+            var url = "/economico/empleo/" + ano_inicial + "/";
+        }else{
+            var url = "/economico/empleo/";
+        }
+        window.location = url;
+    }        
+</script>
+<form name="formulario" id="id_formulario" method="GET" action="">
+    Año Inicial:
+    <select id="id_ano_inicial" name="ano_inicial">
+        <option value="">-------</option>
+        {%for ano in anos%}
+        <option value="{{ano}}">{{ano}}</option>
+        {%endfor%}
+    </select>
+    Año Final:
+    <select id="id_ano_final" name="ano_final">
+        <option value="">-------</option>
+        {%for ano in anos reversed%}
+        <option value="{{ano}}">{{ano}}</option>
+        {%endfor%}
+    </select>
+    <input type="button" value="Filtrar" onClick="procesarFormulario(this.form)"/>
+</form>
+
+{{mensaje}}
+<table>
+    <tr>
+        <th>
+            
+        </th>
+        {%for dato in datos%}
+        <th >
+            <a href="/economico/empleo/{{dato.ano}}/">{{dato.ano}}</a>
+        </th>
+        {%endfor%}
+    </tr>
+    <tr>
+        <td>
+            Población total
+        </td>
+        {%for dato in datos%}
+        <td>
+            {{dato.poblacion_total}}
+        </td>
+        {%endfor%}
+    </tr>
+    <tr>
+        <td>
+            Población de 10 años o mas
+        </td>
+        {%for dato in datos%}
+        <td>
+            {{dato.poblacion_mayor_10}}
+        </td>
+        {%endfor%}
+    </tr>
+    <tr>
+        <td>
+            PEA General
+        </td>
+        {%for dato in datos%}
+        <td>
+            {{dato.pea_general}}
+        </td>
+        {%endfor%}
+    </tr>
+    <tr>
+        <td>
+            Total Ocupados
+        </td>
+        {%for dato in datos%}
+        <td>
+            {{dato.total_ocupados}}
+        </td>
+        {%endfor%}
+    </tr>
+    <tr>
+        <td>
+            Ocupados Actividad Primaria
+        </td>
+        {%for dato in datos%}
+        <td>
+            {{dato.ocupados_actividad_primaria}}
+        </td>
+        {%endfor%}
+    </tr>
+    <tr>
+        <td>
+            Agricultura y Pecuaria
+        </td>
+        {%for dato in datos%}
+        <td>
+            {{dato.agricultura_pecuaria}}
+        </td>
+        {%endfor%}
+    </tr>
+    <tr>
+        <td>
+           Silvicultura
+       </td>
+        {%for dato in datos%}
+        <td>
+            {{dato.silvicultura}}
+        </td>
+        {%endfor%}
+   </tr>
+   <tr>
+       <td>
+           Pesca
+       </td>
+        {%for dato in datos%}
+        <td>
+            {{dato.pesca}}
+        </td>
+        {%endfor%}
+   </tr>
+   <tr>
+       <td>
+           Ocupados Actividad Secundaria
+       </td>
+        {%for dato in datos%}
+        <td>
+            {{dato.ocupados_actividad_secundaria}}
+        </td>
+        {%endfor%}
+   </tr>
+   <tr>
+       <td>
+           Industria Manufacturera
+       </td>
+        {%for dato in datos%}
+        <td>
+            {{dato.manufactura}}
+        </td>
+        {%endfor%}
+   </tr>
+   <tr>
+       <td>
+           Construcción
+       </td>
+        {%for dato in datos%}
+        <td>
+            {{dato.construccion}}
+        </td>
+        {%endfor%}
+   </tr>
+   <tr>
+       <td>
+           Minas y Canteras
+       </td>
+        {%for dato in datos%}
+        <td>
+            {{dato.minas_canteras}}
+        </td>
+        {%endfor%}
+   </tr>
+   <tr>
+       <td>
+           Ocupados Actividad Terciaria
+       </td>
+        {%for dato in datos%}
+        <td>
+            {{dato.ocupados_actividad_terciaria}}
+        </td>
+        {%endfor%}
+   </tr>
+   <tr>
+       <td>
+           Comercio
+       </td>
+        {%for dato in datos%}
+        <td>
+            {{dato.comercio}}
+        </td>
+        {%endfor%}
+   </tr>
+   <tr>
+       <td>
+           Gobierno Central
+       </td>
+        {%for dato in datos%}
+        <td>
+            {{dato.gobierno_central}}
+        </td>
+        {%endfor%}
+   </tr>
+   <tr>
+       <td>
+           Transporte y Comunicación 
+       </td>
+        {%for dato in datos%}
+        <td>
+            {{dato.transporte_comunicacion}}
+        </td>
+        {%endfor%}
+   </tr>
+   <tr>
+       <td>
+           Establecimientos Financieros
+       </td>
+        {%for dato in datos%}
+        <td>
+            {{dato.establecimientos_financieros}}
+        </td>
+        {%endfor%}
+   </tr>
+   <tr>
+       <td>
+           Electricidad, gas y agua
+       </td>
+        {%for dato in datos%}
+        <td>
+            {{dato.electricidad_gas_agua}}
+        </td>
+        {%endfor%}
+   </tr>
+   <tr>
+       <td>
+           Serv. Soc. Comun y personales
+       </td>
+        {%for dato in datos%}
+        <td>
+            {{dato.servicios_sociales}}
+        </td>
+        {%endfor%}
+   </tr>
+   <tr>
+       <td>
+           Desempleo Abierto
+       </td>
+        {%for dato in datos%}
+        <td>
+            {{dato.desempleo_abierto}}
+        </td>
+        {%endfor%}
+   </tr>
+   <tr>
+       <td>
+           PEA/Población
+       </td>
+       {% for coso in pea_poblacion %}
+       <td>
+           {{coso}}
+       </td>
+       {%endfor%}
+   </tr>
+   <tr>
+       <td>
+           Tasa de ocupación
+       </td>
+       {% for valor in tasa_de_ocupacion %}
+       <td>
+           {{valor}}
+       </td>
+       {%endfor%}
+   </tr>
+   <tr>
+       <td>
+           Tasa de desempleo
+       </td>
+       {%for valor in tasa_de_desempleo%}
+       <td>
+           {{valor}}
+       </td>
+       {%endfor%}
+   </tr>
+   <tr>
+       <td>
+           Tasa de sub-empleo
+       </td>
+       {%for valor in tasa_sub_empleo%}
+       <td>
+           {{valor}}
+       </td>
+       {%endfor%}
+   </tr>
+
+</table>
+{% endblock %}

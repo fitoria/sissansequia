@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+{%block tab%}'tabs-3'{%endblock%}
+{%block extrahead%}
+<script type="text/javascript">
+$(document).ready(function(){
+var flip = 0;
+var cadena = window.location.pathname.split("/");
+var tope = cadena.length - 2;
+var parametros = '/';
+for(i=3; i<=tope; i++)
+{
+    parametros+= cadena[i] + "/";
+}
+var url = "/" + cadena[1] + "/grafo/" + cadena[2] + parametros;
+$("#boton-grafo-nominal").click(function () { 
+    $.getJSON(url, 
+       function(data){
+           if(flip++ % 2 == 0){
+               $("#grafo-real").replaceWith('<div id="grafo-real"><img src="' + data.url_real+ '" /></div>');
+           }else{
+               $("#grafo-real").replaceWith('<div id="grafo-real"></div>');
+           }
+       });
+   });   
+$("#boton-grafo-real").click(function () { 
+    $.getJSON(url, 
+       function(data){
+           if(flip++ % 2 == 0){
+               $("#grafo-nominal").replaceWith('<div id="grafo-nominal"><img src="' + data.url_nominal + '" /></div>');
+           }else{
+               $("#grafo-nominal").replaceWith('<div id="grafo-nominal"></div>');
+           }
+       });
+   });   
+});
+</script>
+{%endblock%}
+{% block contenido %}
+<script type="text/javascript">
+    function procesarFormulario(form){
+        var ano_inicial = form.ano_inicial.value;
+        var ano_final= form.ano_final.value;
+
+        if (ano_inicial && ano_final)
+        {
+            var url = "/economico/salario-nominal-real/" + ano_inicial + "-" + ano_final + "/";
+        }else if(ano_inicial){
+            var url = "/economico/salario-nominal-real/" + ano_inicial + "/";
+        }else{
+            var url = "/economico/salario-nominal-real/";
+        }
+        window.location = url;
+    }
+</script>
+<form name="formulario" id="id_formulario" method="GET" action="">
+    Año Inicial:
+    <select name="ano_inicial" id="id_ano_inicial">
+        <option value="">-------</option>
+        {%for ano in anos%}
+        <option value="{{ano}}">{{ano}}</option>
+        {%endfor%}
+    </select>
+    Año Final:
+    <select name="ano_final" id="id_ano_final">
+        <option value="">-------</option>
+        {%for ano in anos reversed%}
+        <option value="{{ano}}">{{ano}}</option>
+        {%endfor%}
+    </select>
+    <input type="button" value="Filtar" name="boton" id="id_boton" onClick="procesarFormulario(this.form)"/>
+</form>
+<div id="boton-grafo-real"><a href="#">Gráfico Salario Mínimo Nominal</a></div>
+<div id="boton-grafo-nominal"><a href="#">Gráfico Salario Mínimo Real</a></div>
+<div id="grafo-nominal"></div>
+<br/>
+<div id="grafo-real"></div>
+<table>
+    <tr>
+        <th class="sortable-numeric">
+            Año
+        </th>
+        {%if tiene_mes%}
+        <th>
+            Mes
+        </th>
+        {%endif%}
+        <th colspan="3">
+            Salario Nominal Promedio
+        </th>
+        <th colspan="3">
+            Salario Real Promedio 
+        </th>
+        <th colspan="3">
+            Variación Porcentual del salario 
+        </th>
+    </tr>
+    <tr>
+        <td>
+        </td>
+        {%if tiene_mes%}
+        <td>
+        </td>
+        {%endif%}
+        <th class="sortable-numeric">
+            Asegurados INSS
+        </th>
+        <th class="sortable-numeric">
+            Gobierno Central
+        </th>
+        <th class="sortable-numeric">
+            Salario Nacional
+        </th>
+        <th class="sortable-numeric">
+            Asegurados INSS
+        </th>
+        <th class="sortable-numeric">
+            Gobierno Central
+        </th>
+        <th class="sortable-numeric">
+            Salario Nacional
+        </th>
+        <th class="sortable-numeric">
+            Asegurados INSS
+        </th>
+        <th class="sortable-numeric">
+            Gobierno Central
+        </th>
+        <th class="sortable-numeric">
+            Salario Nacional
+        </th>
+
+    </tr>
+    {%for fila in datos %}
+    <tr>
+        <td>
+            <a href="/economico/salario-nominal-real/{{fila.ano}}/">{{fila.ano}}</a>
+        </td>
+        {%if tiene_mes%}
+        <td>
+            {{fila.mes}}
+        </td>
+        {%endif%}
+        {%for coso in fila.datos%}
+        <td>
+            {{coso|floatformat:2}}
+        </td>
+        {%endfor%}
+    </tr>
+    {%endfor%}
+    <tfoot>
+    <tr>
+        {%if tiene_mes%}
+        {%else%}
+        <td>
+            variaciones
+        </td>
+        {%for variacion in variaciones%}
+        <td>
+            {{variacion|floatformat:2}}%
+        </td>
+        {%endfor%}
+        {%endif%}
+    </tr>
+    <tfoot>
+</table>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<div class="titulografo"><h2>Disponibilidad de Alimentos</h2></div>
+numeros de casos: {{casos}} familias <div id="vergrafo" class="derecha"><a href="/disponibilidad/grafos/">Ver Gráficos</a></div><br>
+
+<table>
+<caption>Tabla Disponibilidad de alimentos</caption>
+<thead>
+         <tr>
+				 <th>Consumidores</th>
+				 <th>#</th>
+                 <th>Alimentos</th>
+                 <th>Total(qq)</th>
+				 <th>Promedio por Familia (qq)</th>
+         </tr>
+   </thead>
+<tr>
+				 <td>Total de adultos</td>
+                 <td>{{ total_adulto }}</td>
+                 <td>Maiz</td>
+				 <td>{{ total_maiz }}</td>
+				 <td>{{ prom_maiz|floatformat:2 }}</td>
+</tr>
+<tr>
+				 <td>Total niños/niñas</td>
+                 <td>{{ total_ninos }}</td>
+                 <td>Frijol</td>
+				 <td>{{ total_frijol }}</td>
+				 <td>{{ prom_frijol|floatformat:2 }}</td>
+</tr>
+<tr>
+				 <td>Total vacas</td>
+                 <td>{{ total_vacas }}</td>
+                 <td>sorgo</td>
+				 <td>{{ total_sorgo }}</td>
+				 <td>{{ prom_sorgo|floatformat:2 }}</td>
+</tr>
+<tr>
+				 <td>Total cerdos</td>
+                 <td>{{ total_cerdos }}</td>
+                 <td></td>
+				 <td></td>
+				 <td></td>
+</tr>
+<tr>
+				 <td>Total gallinas</td>
+                 <td>{{ total_gallinas }}</td>
+                 <td></td>
+				 <td></td>
+				 <td></td>
+</tr>
+</table>
+<table>
+<caption>Tabla Disponibilidad de alimentos</caption>
+<thead>
+         <tr>
+				 <th>Criterios</th>
+				 <th>Disponibilidad en dias</th>
+         </tr>
+   </thead>
+<tr>
+				 <td>El Maíz es consumido solamente por humanos</td>
+                 <td>{{ criterio1|floatformat:2 }}</td>
+</tr>
+<tr>
+				 <td>El Frijol es consumido por humanos</td>
+                 <td>{{ criterio2|floatformat:2 }}</td>
+</tr>
+<tr>
+				 <td>El Maíz y Sorgo son consumidos por humanos y animales</td>
+                 <td>{{ criterio3|floatformat:2 }}</td>                 
+</tr>
+</table>
+{% endblock %}

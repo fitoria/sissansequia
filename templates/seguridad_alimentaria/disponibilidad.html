@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{%block tab%}'tabs-5'{%endblock%}
+{%block extrahead%}
+<script type="text/javascript">
+$(document).ready(function(){
+var flip = 0;
+var cadena = window.location.pathname.split("/");
+var tope = cadena.length - 2;
+var parametros = '/';
+for(i=3; i<=tope; i++)
+{
+    parametros+= cadena[i] + "/";
+}
+var url = "/" + cadena[1] + "/grafo/" + cadena[2] + parametros;
+$("#boton-grafo-disponibilidades").click(function () { 
+    $.getJSON(url, 
+       function(data){
+           if(flip++ % 2 == 0){
+               $("#grafo-disponibilidades").replaceWith('<div id="grafo-disponibilidades"><img src="' + data.url_disponibilidades + '" /></div>');
+           }else{
+           $("#grafo-disponibilidades").replaceWith('<div id="grafo-disponibilidades"></div>');
+           }
+       });
+   });   
+$("#boton-grafo-consumos").click(function () { 
+    $.getJSON(url, 
+       function(data){
+           if(flip++ % 2 == 0){
+               $("#grafo-consumos").replaceWith('<div id="grafo-consumos"><img src="' + data.url_consumos + '" /></div>');
+           }else{
+               $("#grafo-consumos").replaceWith('<div id="grafo-consumos"></div>');
+           }
+       });
+   });
+});
+</script>
+{%endblock%}
+
+{% block contenido %}
+<script type="text/javascript">
+    function procesarFormulario(form){
+        var ano_inicial = form.ano_inicial.value;
+        var ano_final = form.ano_final.value;
+        var producto = form.producto.value;
+
+        if (ano_inicial && ano_final){
+            if (producto){
+                var url = "/seguridad-alimentaria/disponibilidad/" + ano_inicial + "-" + ano_final + "/" + producto + "/";
+            }else{
+                var url = "/seguridad-alimentaria/disponibilidad/" + ano_inicial + "-" + ano_final + "/";
+            }
+        }else if(ano_inicial){
+            if (producto){
+                var url = "/seguridad-alimentaria/disponibilidad/" + ano_inicial +  "/" + producto + "/";
+            }else{
+                var url = "/seguridad-alimentaria/disponibilidad/" + ano_inicial + "/";
+            }
+        }else{
+            if (producto){
+                var url = "/seguridad-alimentaria/disponibilidad/" + producto + "/";
+            }else{
+                var url = "/seguridad-alimentaria/disponibilidad/";
+            }
+        }
+        window.location = url;
+    }
+</script>
+<form id="id_formulario" name="formulario" method="GET" action="">
+    Año Inicial: 
+    <select id="id_ano_inicial" name="ano_inicial">
+        <option value="">-----</option>
+        {%for ano in anos%}
+        <option value="{{ano}}">{{ano}}</option>
+        {%endfor%}
+    </select>
+    Año Final:
+    <select id="id_ano_final" name="ano_final">
+        <option value="">-----</option>
+        {%for ano in anos reversed%}
+        <option value="{{ano}}">{{ano}}</option>
+        {%endfor%}
+    </select>
+    Producto:
+    <select id="id_producto" name="producto">
+        <option value="">----</option>
+        {%for producto in productos_all%}
+        <option value="{{producto.slug}}">{{producto.nombre}}</option>
+        {%endfor%}
+    </select>
+    <input type="button" value="Filtrar" onClick="procesarFormulario(this.form)"/>
+</form>
+<div id="boton-grafo-disponibilidades"><a href="#">Gráfico Disponbilidad</a></div>
+<div id="boton-grafo-consumos"><a href="#">Gráfico Consumo Aparente</a></div>
+<div id="grafo-consumos"></div>
+<div id="grafo-disponibilidades"></div>
+{{mensaje}}
+<table>
+    <tr>
+        <th class="sortable-numeric">
+            Año
+        </th>
+        {%for producto in productos%}
+        <th class="sortable-numeric">
+            {{producto.nombre}}
+        </th>
+        {%endfor%}
+    </tr>
+    <tr>
+        <td>
+            Disponibilidad
+        </td>
+    </tr>
+    {%for dato in disponibilidades reversed%}
+    <tr>
+        <td class="{% cycle alt, none%}">
+            <a href="/seguridad-alimentaria/disponibilidad/{{dato.ano}}"/> {{dato.ano}} </a>
+        </td>
+        {%for numero in dato.datos%}
+        <td class="{% cycle alt, none%}">
+            {{numero}}
+        </td>
+        {%endfor%}
+    </tr>
+    {%endfor%}
+    <tr>
+        <td>
+            Variación
+        </td>
+        {%for variacion in var_disp%}
+        <td>
+            {{variacion}}%
+        </td>
+        {%endfor%}
+    </tr>
+    <tr>
+        <td>
+            Consumo Aparente
+        </td>
+    {%for dato in consumos reversed%}
+    <tr>
+        <td>
+            <a href="/seguridad-alimentaria/disponibilidad/{{dato.ano}}"/> {{dato.ano}} </a>
+        </td>
+        {%for numero in dato.datos%}
+        <td>
+            {{numero}}
+        </td>
+        {%endfor%}
+    </tr>
+    {%endfor%}
+    <tr>
+        <td>
+            Variación
+        </td>
+        {%for variacion in var_consumos%}
+        <td>
+            {{variacion}}%
+        </td>
+        {%endfor%}
+    </tr>
+</table>
+{% endblock %}

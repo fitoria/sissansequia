@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{%block tab%}'tabs-6'{%endblock%}
+{% block contenido %}
+
+<div class="titulografo"><h2>Estado de Nutrición</h2></div>
+numeros de casos: {{casos}} familias   <div id="vergrafo" class="derecha"><a href="/sequia/nutricion/grafos/">Ver Gráficos</a></div><br>
+
+<table>
+<caption>Tabla Estado de Nutrición niños</caption>
+<thead>
+         <tr>
+				 <th>Edad</th>
+				 <th>Normal</th>
+                 <th>Riesgos</th>
+                 <th>Desnutrición</th>
+				 <th>No sabe</th>
+         </tr>
+</thead>
+<tr>
+				 <td>1-5 años</td>
+                 <td>{{ ninos_normal }}</td>
+                 <td>{{ ninos_riesgo }}</td>
+				 <td>{{ ninos_desnutrido }}</td>
+				 <td>{{ ninos_nosabe }}</td>
+</tr>
+<tr>
+				 <td>6-10 años</td>
+                 <td>{{ ninos_normal_s }}</td>
+                 <td>{{ ninos_riesgo_s }}</td>
+				 <td>{{ ninos_desnutrido_s }}</td>
+				 <td>{{ ninos_nosabe_s }}</td>
+</tr>
+<tr>
+				 <td>11-15 años</td>
+                 <td>{{ ninos_normal_o }}</td>
+                 <td>{{ ninos_riesgo_o }}</td>
+				 <td>{{ ninos_desnutrido_o }}</td>
+				 <td>{{ ninos_nosabe_o }}</td>
+</tr>
+</table>
+<table>
+<caption>Tabla Estado de Nutrición niñas</caption>
+<thead>
+         <tr>
+				 <th>Edad</th>
+				 <th>Normal</th>
+                 <th>Riesgos</th>
+                 <th>Desnutrición</th>
+				 <th>No sabe</th>
+         </tr>
+</thead>
+<tr>
+				 <td>1-5 años</td>
+                 <td>{{ ninas_normal }}</td>
+                 <td>{{ ninas_riesgo }}</td>
+				 <td>{{ ninas_desnutrido }}</td>
+				 <td>{{ ninas_nosabe }}</td>
+</tr>
+<tr>
+				 <td>6-10 años</td>
+                 <td>{{ ninas_normal_s }}</td>
+                 <td>{{ ninas_riesgo_s }}</td>
+				 <td>{{ ninas_desnutrido_s }}</td>
+				 <td>{{ ninas_nosabe_s }}</td>
+</tr>
+<tr>
+				 <td>11-15 años</td>
+                 <td>{{ ninas_normal_o }}</td>
+                 <td>{{ ninas_riesgo_o }}</td>
+				 <td>{{ ninas_desnutrido_o }}</td>
+				 <td>{{ ninas_nosabe_o }}</td>
+</tr>
+</table>
+{% endblock %}

@@ -1,0 +1,81 @@
+{%extends "base.html"%}
+{%block tab%}'tabs-6'{%endblock%} 
+{% block extrahead %}
+<script type="text/javascript" src="/js/s3Slider.js"></script>
+<script>
+        $(document).ready(function() {
+        $("#id_fecha_inicio").datepicker({ dateFormat: 'yy-mm-dd', dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],changeYear: true});
+        $("#id_fecha_final").datepicker({ dateFormat: 'yy-mm-dd', dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],changeYear: true});
+        var departamento = document.getElementById("id_departamento");
+        var municipio = document.getElementById("id_municipio");
+        var comunidad= document.getElementById("id_comunidad");
+        var entrevistado = document.getElementById("id_entrevistado");
+        $("#id_departamento").change(function () {
+            var index = departamento.options.selectedIndex;
+            var id = departamento.options[index].value;
+            $.getJSON("/ajax/municipio/" + id +"/",
+            function(data){
+                municipio.options.length = 0;
+                comunidad.options.length = 0;
+                municipio.options[0] = new Option("--------");
+                for(i=0; i< data.length; i++){
+                    municipio.options[i+1] = new Option(data[i][1], data[i][0]);
+                }
+            });
+        });
+        $("#id_municipio").change(function () {
+            var index = municipio.options.selectedIndex;
+            var id = municipio.options[index].value;
+            $.getJSON("/ajax/comunidad/" + id +"/",
+            function(data){
+                comunidad.options.length = 0;
+                comunidad.options[0] = new Option("---------");
+                for(i=0; i< data.length; i++){
+                    comunidad.options[i+1] = new Option(data[i][1], data[i][0]);
+                }
+            });
+        });
+        $("#id_comunidad").change(function () {
+            var index = comunidad.options.selectedIndex;
+            var id = comunidad.options[index].value;
+            $.getJSON("/ajax/entrevista/" + id +"/",
+            function(data){
+                entrevistado.options.length = 0;
+                entrevistado.options[0] = new Option("---------");
+                for(i=0; i< data.length; i++){
+                    entrevistado.options[i+1] = new Option(data[i][1], data[i][0]);
+                }
+            });
+        });
+ });
+</script>
+{% endblock %}
+{%block contenido%}
+<br>
+<div id="filtros"><b>Filtros</b> :: Departamento: <i>{{ request.session.departamento.nombre }}</i> | Municipio: <i> {{request.session.municipio.nombre}}</i> | Comunidad:<i> {{request.session.comunidad.nombre}}</i> | Entrevistado: <i> {{ request.session.entrevistado.nombre }}</i></div>
+                <form action"." method="POST">
+                <fieldset>
+                <div id="formulario_tabla">
+                       <div class="form_label"><b>{{form.fecha_inicio.label}}</b></div>
+                       <div  class="datepicker">{{form.fecha_inicio}}</div>
+                       <div class="form_label"><b>{{form.fecha_final.label}}</b></div>
+                       <div class="datepicker">{{form.fecha_final}}</div>
+                       <div id="general_form">
+                          <div class="form_label"><b>{{form.departamento.label}}</b></div>
+                          <div class="form_widget">{{form.departamento}}</div>
+                          <div class="form_label"><b>{{form.municipio.label}}</b></div>
+                          <div class="form_widget">{{form.municipio}}</div>
+                          <div class="form_label"><b>{{form.comunidad.label}}</b></div>
+                          <div class="form_widget">{{form.comunidad}}</div>
+                          <div class="form_label"><b>{{form.entrevistado.label}}</b></div>
+                          <div class="form_widget">{{form.entrevistado}}</div>
+                       </div>
+                </div>
+
+                  <input type="submit" value="Consultar" id="boton" class="filtro"/>
+                </fieldset>
+                </form>
+{%if mensaje%}
+                    <div id="mensaje">{{mensaje}}</div>
+{%endif%}
+{% endblock %} 

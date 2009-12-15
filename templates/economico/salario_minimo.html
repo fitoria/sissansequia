@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+{%block tab%}'tabs-3'{%endblock%}
+{%block extrahead%}
+<script type="text/javascript">
+$(document).ready(function(){
+var flip = 0;
+var cadena = window.location.pathname.split("/");
+var tope = cadena.length - 2;
+var parametros = '/';
+for(i=3; i<=tope; i++)
+{
+    parametros+= cadena[i] + "/";
+}
+var url = "/economico/grafo/salario-minimo" + parametros;
+$("#boton-grafo").click(function () { 
+    $.getJSON(url, 
+       function(data){
+           if(flip++ % 2 == 0){
+               $("#grafo").replaceWith('<div id="grafo"><img src="' + data.url + '" /></div>');
+           }else{
+               $("#grafo").replaceWith('<div id="grafo"></div>');
+           }
+       });
+   });   
+});   
+</script>
+{%endblock%}
+{% block contenido %}
+<script type="text/javascript">
+    function procesarFormulario(form){
+        var ano_inicial = form.ano_inicial.value;
+        var ano_final= form.ano_final.value;
+        var sector = form.sector.value;
+
+        if (ano_inicial && ano_final)
+        {
+            if(sector){
+                var url = "/economico/salario-minimo/" + ano_inicial + "-" + ano_final + "/sector/" + sector + "/";
+            }else{
+                var url = "/economico/salario-minimo/" + ano_inicial + "-" + ano_final + "/";
+            }
+        }else if(ano_inicial){
+            if(sector){
+                var url = "/economico/salario-minimo/" + ano_inicial + "/sector/" + sector + "/";
+            }else{
+                var url = "/economico/salario-minimo/" + ano_inicial + "/";
+            }
+        }else{
+            if(sector){
+                var url = "/economico/salario-minimo/sector/" + sector + "/";
+            }else{
+                var url = "/economico/salario-minimo/";
+            }
+        }
+        window.location = url;
+    }
+</script>
+
+<form name="formulario" id="id_formulario" method="GET" action="">
+    Año Inicial:
+    <select name="ano_inicial" id="id_ano_inicial">
+        <option value="">-------</option>
+        {%for ano in rango%}
+        <option value="{{ano}}">{{ano}}</option>
+        {%endfor%}
+    </select>
+    Año Final:
+    <select name="ano_final" id="id_ano_final">
+        <option value="">-------</option>
+        {%for ano in rango reversed%}
+        <option value="{{ano}}">{{ano}}</option>
+        {%endfor%}
+    </select>
+    Sector:
+    <select name="sector" id="id_sector">
+        <option value="">-------</option>
+        {%for sector in sectores_all%}
+        <option value="{{sector.slug}}">{{sector.nombre}}</option>
+        {%endfor%}
+    </select>
+    <input type="button" value="Filtar" name="boton" id="id_boton" onClick="procesarFormulario(this.form)"/>
+</form>
+<div id="boton-grafo"><a href="#">Gráfico</a></div>
+<div id="grafo"></div>
+Salario Mínimo
+<table>
+    <tr>
+        <th class="sortable-numeric">
+            Año
+        </th>
+        {%if tiene_mes%}
+        <th class="sortable-numeric">
+            Mes
+        </th>
+        {%endif%}
+        {%for sector in sectores%}
+        <th class="sortable-numeric">
+            {{sector.nombre}}
+        </th>
+        {%endfor%}
+    </tr>
+    {%for fila in datos %}
+    <tr class="{%cycle alt, none%}">
+        <td>
+            <a href="/economico/salario-minimo/{{fila.ano}}/">{{fila.ano}}</a>
+        </td>
+        {%if tiene_mes%}
+        <td>
+            {{fila.mes}}
+        </td>
+        {%endif%}
+        {%for coso in fila.datos%}
+        <td>
+            {{coso}}
+        </td>
+        {%endfor%}
+    </tr>
+    {%endfor%}
+    <tfoot>
+    <tr>
+        {%if tiene_mes%}
+        <th colspan="2">
+           promedio
+        </th>
+        {%for promedio in promedios%}
+        <th>
+            {{promedio|floatformat:2}}
+        </th>
+        {%endfor%}
+        {%else%}
+        <th>
+            variaciones
+        </th>
+        {%for variacion in variaciones%}
+        <th>
+            {{variacion}}
+        </th>
+        {%endfor%}
+        {%endif%}
+    </tr>
+</tfoot>
+</table>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{%block tab%}'tabs-1'{%endblock%}
+{%block extrahead%}
+<script type="text/javascript" src="/js/s3Slider.js"></script>
+<script type="text/javascript"> 
+$(document).ready(function() {
+    $('#slider1').s3Slider({
+        timeOut: 4000 
+    });
+});
+</script> 
+{%endblock%}
+{% block contenido %}
+<div id="slider1"> 
+	<ul id="slider1Content"> 
+	<li class="slider1Image"> 
+	<a href=""><img src="/imagen/frijol.jpg" width="700" height="400" alt="frijol"/></a> 
+		<span class="bottom"><strong>El Frijol</strong><br />Es una planta originaria de América que se cultiva en todo el mundo. Existen numerosas variedades y de ellas se consumen tanto las vainas verdes (judía verde o chauchas) como los granos secos.</span></li> 
+	<li class="slider1Image"> 
+          	<img src="/imagen/maiz.jpg" width="700" height="400" alt="maiz"/> 
+          	<span class="bottom"><strong>El Maíz</strong><br />Es una gramínea anual originaria de las Américas introducida en Europa en el siglo XVI. Actualmente, es el cereal con mayor volumen de producción en el mundo, superando al trigo y el arroz. En la mayor parte de los países de América, el maíz constituye la base histórica de la alimentación regional y uno de los aspectos centrales de la cultura mesoamericana.</span> 
+      	</li> 
+	<li class="slider1Image"> 
+          	<img src="/imagen/sorgo1.jpg" width="700" height="400" alt="sorgo"/> 
+          	<span class="bottom"><strong>El Sorgo</strong><br />Género botánico de unas 20 especies de gramíneas oriundas de las regiones tropicales y subtropicales de África oriental.Se cultivan en su zona de origen, Europa, América y Asia como cereal para consumo humano, animal, en la producción de forrajes, y para la elaboración de bebidas alcohólicas. Su resistencia a la sequía y el calor lo hace un cultivo importante en regiones áridas, y es uno de los cultivos alimentarios más importantes del mundo.</span></li> 
+      	<div class="clear slider1Image"></div> 
+   	</ul> 
+</div> 
+{% endblock %}

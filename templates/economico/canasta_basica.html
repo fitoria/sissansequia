@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{%block tab%}'tabs-3'{%endblock%}
+{%block extrahead%}
+<script type="text/javascript">
+$(document).ready(function(){
+var flip = 0;
+var cadena = window.location.pathname.split("/");
+var tope = cadena.length - 2;
+var parametros = '/';
+for(i=3; i<=tope; i++)
+{
+    parametros+= cadena[i] + "/";
+}
+var url = "/economico/grafo/canasta-basica" + parametros;
+$("#boton-grafo").click(function () { 
+    $.getJSON(url, 
+       function(data){
+           if(flip++ % 2 == 0){
+               $("#grafo").replaceWith('<div id="grafo"><img src="' + data.url + '" /></div>');
+           }else{
+               $("#grafo").replaceWith('<div id="grafo"></div>');
+           }
+       });
+   });   
+});   
+</script>
+{%endblock%}
+{% block contenido %}
+<script type="text/javascript">
+    function procesarFormulario(form){
+        var ano_inicial = form.ano_inicial.value;
+        var ano_final= form.ano_final.value;
+        var tipo = form.tipo.value;
+
+        if (ano_inicial && ano_final)
+        {
+            if(tipo){
+                var url = "/economico/canasta-basica/" + ano_inicial + "-" + ano_final + "/tipo/" + tipo + "/";
+            }else{
+                var url = "/economico/canasta-basica/" + ano_inicial + "-" + ano_final + "/";
+            }
+        }else if(ano_inicial){
+            if(tipo){
+                var url = "/economico/canasta-basica/" + ano_inicial + "/tipo/" + tipo + "/";
+            }else{
+                var url = "/economico/canasta-basica/" + ano_inicial + "/";
+            }
+        }else{
+            if(tipo){
+                var url = "/economico/canasta-basica/tipo/" + tipo + "/";
+            }else{
+                var url = "/economico/canasta-basica/";
+            }
+        }
+        window.location = url;
+    }
+</script>
+<form name="formulario" id="id_formulario" method="GET" action="">
+    Año Inicial:
+    <select name="ano_inicial" id="id_ano_inicial">
+        <option value="">-------</option>
+        {%for ano in rango%}
+        <option value="{{ano}}">{{ano}}</option>
+        {%endfor%}
+    </select>
+    Año Final:
+    <select name="ano_final" id="id_ano_final">
+        <option value="">-------</option>
+        {%for ano in rango reversed%}
+        <option value="{{ano}}">{{ano}}</option>
+        {%endfor%}
+    </select>
+    Tipo:
+    <select name="tipo" id="id_tipo">
+        <option value="">-------</option>
+        {%for tipo in tipos_all%}
+        <option value="{{tipo.slug}}">{{tipo.tipo}}</option>
+        {%endfor%}
+    </select>
+    <input type="button" value="Filtar" name="boton" id="id_boton" onClick="procesarFormulario(this.form)"/>
+</form>
+<div id="boton-grafo"><a href="#">Gráfico</a></div>
+<div id="grafo"></div>
+Canasta Básica
+<table>
+    <tr>
+        <th class="sortable-numeric">
+            Año
+        </th>
+        {%for columna in columnas%}
+        <th class="sortable-numeric">
+            {{columna}}
+        </th>
+        {%endfor%}
+    </tr>
+    {%for fila in datos reversed%}
+    <tr class="{%cycle alt, none%}">
+        <td>
+            <a href="/economico/canasta-basica/{{fila.ano}}/">{{fila.ano}}</a>
+        </td>
+        {%for coso in fila.datos%}
+        <td>
+            {{coso|floatformat:2}}
+        </td>
+        {%endfor%}
+    </tr>
+    {%endfor%}
+    <tr>
+        <td>
+            Variaciones
+        </td>
+        {%for variacion in variaciones%}
+        <td>
+            {{variacion|floatformat:2}}%
+        </td>
+        {%endfor%}
+    </tr>
+</table>
+{% endblock %}
