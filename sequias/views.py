@@ -20,6 +20,8 @@ import ho.pisa as pisa
 import cStringIO as StringIO
 import cgi
 
+GRAFO_SIZE=(320, 250)
+
 def index(request):
     return render_to_response('base.html')
 
@@ -519,15 +521,15 @@ def grafo_perdida(request):
     mensa2_P = "Grafico Sorgo"
     mensa3_P = "Grafico razones de perdida"
     #Envios de las url solo para primera
-    url = grafos.make_graph(lista, legends, mensa, return_json=False)
-    url1 = grafos.make_graph(lista1, legends1, mensa1, return_json=False)
-    url2 = grafos.make_graph(lista2, legends2, mensa2, return_json=False)
-    url6 = grafos.make_graph(lista3, legends3, mensa3, return_json=False)
+    url = grafos.make_graph(lista, legends, mensa, return_json=False, size=GRAFO_SIZE)
+    url1 = grafos.make_graph(lista1, legends1, mensa1, return_json=False, size=GRAFO_SIZE)
+    url2 = grafos.make_graph(lista2, legends2, mensa2, return_json=False, size=GRAFO_SIZE)
+    url6 = grafos.make_graph(lista3, legends3, mensa3, return_json=False, size=GRAFO_SIZE)
     #Envios de las url solo para postrera
-    url3 = grafos.make_graph(lista_P, legends_P, mensa_P, return_json=False)
-    url4 = grafos.make_graph(lista1_P, legends1_P, mensa1_P, return_json=False)
-    url5 = grafos.make_graph(lista2_P, legends2_P, mensa2_P, return_json=False)
-    url7 = grafos.make_graph(lista3_P, legends3_P, mensa3_P, return_json=False)
+    url3 = grafos.make_graph(lista_P, legends_P, mensa_P, return_json=False, size=GRAFO_SIZE)
+    url4 = grafos.make_graph(lista1_P, legends1_P, mensa1_P, return_json=False, size=GRAFO_SIZE)
+    url5 = grafos.make_graph(lista2_P, legends2_P, mensa2_P, return_json=False, size=GRAFO_SIZE)
+    url7 = grafos.make_graph(lista3_P, legends3_P, mensa3_P, return_json=False, size=GRAFO_SIZE)
     
     return render_to_response("encuesta/grafos.html", locals())
                                                        
@@ -597,8 +599,8 @@ def grafo_nutricion(request):
     mensa1 = "Grafico Nutrición Niños"
     mensa2 = "Grafico Nutrición Niñas"
     #los link :)
-    url = grafos.make_graph(lista1,legends1,mensa1,return_json=False)
-    url1 = grafos.make_graph(lista2,legends2,mensa2,return_json=False)
+    url = grafos.make_graph(lista1,legends1,mensa1,return_json=False, size=GRAFO_SIZE)
+    url1 = grafos.make_graph(lista2,legends2,mensa2,return_json=False, size=GRAFO_SIZE)
     
     return render_to_response("encuesta/grafo_nutricion.html", locals())
 
@@ -673,7 +675,7 @@ def grafo_disponibilidad(request):
     message = "Quintales por familia"
     
     url_disp = grafos.make_graph(data, legends, message, multiline=True, 
-                           return_json=False, type=GroupedVerticalBarChart)
+                           return_json=False, type=GroupedVerticalBarChart, size=GRAFO_SIZE)
     #con formula rara
     total_adulto = gdispo.aggregate(Sum('disponibilidad__adultos_casa'))['disponibilidad__adultos_casa__sum']
     total_ninos = gdispo.aggregate(Sum('disponibilidad__ninos_casa'))['disponibilidad__ninos_casa__sum']
@@ -703,7 +705,7 @@ def grafo_disponibilidad(request):
     message = "Disponibilidad en dias"
 
     url_disp_formula = grafos.make_graph(data, legends, message, multiline=True, 
-                           return_json=False, type=GroupedVerticalBarChart)
+                           return_json=False, type=GroupedVerticalBarChart, size=GRAFO_SIZE)
 
     dicc = {'grafo_disp': url_disp, 'grafo_disp_formula': url_disp_formula, 
             'casos': casos}

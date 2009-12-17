@@ -81,7 +81,6 @@ def __bar_graphic__(data, legends, axis_labels, size, steps,
 
     left_axis = range(int(round(min_value*0.95)), tope, int(step))
     left_axis[0]=''
-    print left_axis
 
     if type==StackedHorizontalBarChart:
         graph = StackedHorizontalBarChart(size[0], size[1], x_range=(0, max_value*1.05))
