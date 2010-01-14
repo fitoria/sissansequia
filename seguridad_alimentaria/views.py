@@ -90,7 +90,8 @@ def __dependencia_alimentaria__(request, ano_inicial=None, ano_final=None):
         tope = 0
         fila_inicial = None
         fila_final = None
-    for i in range(tope):
+    tope_productos = len(fila_inicial)
+    for i in range(tope_productos):
         try:
             variacion = ((fila_final[i]-fila_inicial[i])/fila_inicial[i])*100 if fila_inicial[i]!=0 else 100 
         except:
