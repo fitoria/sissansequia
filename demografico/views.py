@@ -132,3 +132,109 @@ def grafo_poblacion(request, ano_inicial=None, ano_final=None, departamento=None
     
     return grafos.make_graph(numeros, leyendas, datos['mensaje'],
                              axis, type=SimpleLineChart, multiline=True, steps=6, size=(600,500))
+
+
+def densidad(request, ano_inicial=None, ano_final=None, departamento=None):
+    dicc = __densidad__(request, ano_inicial, ano_final, departamento)
+    return render_to_response('demografico/densidad.html', dicc)
+
+def grafo_densidad(request, ano_inicial=None, ano_final=None, departamento=None):
+    dicc = __densidad__(request, ano_inicial, ano_final, departamento)
+    
+    leyenda = ['Densidad']
+    numeros = [float(dato['densidad']) for dato in dicc['datos']] 
+    if ano_inicial and ano_final:
+        axis = range(int(ano_inicial), int(ano_final)+1)
+    elif ano_inicial:
+        axis=ano_inicial
+    else:
+        axis = dicc['anos']
+
+    return grafos.make_graph(numeros, leyenda, dicc['mensaje'],
+                             axis, type=SimpleLineChart, multiline=False, steps=6, size=(600,500))
+
+def __densidad__(request, ano_inicial=None, ano_final=None, departamento=None):
+    departamental=None
+    departamentos = Departamento.objects.all()
+    anos = Poblacion.objects.all().aggregate(ano_minimo = Min('ano'),
+                                             ano_maximo = Max('ano'))
+    try:
+        rango_anos = range(int(anos['ano_minimo']), int(anos['ano_maximo'])+1)
+    except:
+        rango_anos = None
+
+    if departamento:
+        dept = get_object_or_404(Departamento, slug=departamento)
+        departamental=True
+    else:
+        dept=None
+        extension_nicaragua = Departamento.objects.all().aggregate(total=Sum('extension'))['total']
+    if dept:
+        datos=[]
+        resultado = {'ano': None, 'total': None, 'densidad': None}
+        if ano_inicial and ano_final:
+            for ano in range(int(ano_inicial), int(ano_final)+1):
+                dato = Poblacion.objects.get(ano = ano, departamento = dept)
+                resultado['ano']=ano
+                resultado['densidad']=dato.total_ambos_sexos/dept.extension
+                resultado['total']=dato.total_ambos_sexos
+                resultado['departamento']=dato.departamento
+                temp = dict.copy(resultado)
+                datos.append(temp)
+
+            mensaje = "Densidad poblacional del departamento de %s (%s-%s)" % (dept.nombre, ano_inicial, ano_final)
+        elif ano_inicial:
+            dato = Poblacion.objects.get(ano=ano_inicial, departamento = dept)
+            resultado['ano']=ano
+            resultado['densidad']=dato.total_ambos_sexos/dept.extension
+            resultado['total']=dato.total_ambos_sexos
+            resultado['departamento']=dato.departamento
+            temp = dict.copy(resultado)
+            datos.append(temp)
+            mensaje = "Densidad poblacional del departamento de %s (%s)" % (dept.nombre, ano_inicial)
+        else:
+            try:
+                for ano in rango_anos:
+                    dato = Poblacion.objects.get(ano=ano, departamento=dept)
+                    resultado['ano']=ano
+                    resultado['densidad']=dato.total_ambos_sexos/dept.extension
+                    resultado['total']=dato.total_ambos_sexos
+                    resultado['departamento']=dato.departamento
+                    temp = dict.copy(resultado)
+                    datos.append(temp)
+            except TypeError:
+                pass
+
+            mensaje = "Densidad poblacional del departamento de %s" % (dept.nombre)
+    else:
+        datos = []
+        if ano_inicial and ano_final:
+            for ano in range(int(ano_inicial), int(ano_final)+1):
+                resultado = Poblacion.objects.filter(ano=ano).aggregate(
+                    total = Sum('total_ambos_sexos'))
+                resultado['ano']=ano
+                resultado['densidad']=resultado['total']/extension_nicaragua
+                datos.append(resultado)
+            mensaje = "Densidad Poblacional (%s-%s)" % (ano_inicial, ano_final)
+        elif ano_inicial:
+            resultado = Poblacion.objects.filter(ano=ano_inicial).aggregate(
+                    total = Sum('total_ambos_sexos'))
+            resultado['ano']=ano_inicial
+            resultado['densidad']=resultado['total']/extension_nicaragua
+            datos.append(resultado)
+            mensaje = "Poblacion (%s)" % ano_inicial
+        else:
+            try:
+                for ano in rango_anos:
+                    resultado = Poblacion.objects.filter(ano=ano).aggregate(
+                        total = Sum('total_ambos_sexos'))
+                    resultado['ano']=ano
+                    resultado['densidad']=resultado['total']/extension_nicaragua
+                    datos.append(resultado)
+            except TypeError:
+                pass
+            mensaje = "Densidad Poblacional Total"
+
+    dicc = {'datos': datos, 'mensaje': mensaje, 
+            'departamental': departamental, 'anos': rango_anos, 'departamentos': departamentos}
+    return dicc

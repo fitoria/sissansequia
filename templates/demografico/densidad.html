@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {%block tab%}'tabs-1'{%endblock%}
-{%block titulo%}Población{%endblock%}
+{%block titulo%}Densidad Poblacional{%endblock%}
 {%block extrahead%}
 <script type="text/javascript">
 $(document).ready(function(){
@@ -12,7 +12,7 @@ for(i=3; i<=tope; i++)
 {
     parametros+= cadena[i] + "/";
 }
-var url = "/demografico/grafo/poblacion" + parametros;
+var url = "/demografico/grafo/densidad" + parametros;
 $("#boton-grafo").click(function () { 
     $.getJSON(url, 
        function(data){
@@ -34,23 +34,23 @@ $("#boton-grafo").click(function () {
         var departamento = form.departamento.value;
         if (ano_inicial && ano_final){
             if (departamento){
-                var url = "/demografico/poblacion/" + ano_inicial + "-" + ano_final + "/" + departamento;
+                var url = "/demografico/densidad/" + ano_inicial + "-" + ano_final + "/" + departamento;
             }else{
-                var url = "/demografico/poblacion/" + ano_inicial + "-" + ano_final;
+                var url = "/demografico/densidad/" + ano_inicial + "-" + ano_final;
             }
         }else if(ano_inicial){
             if (departamento){
-                var url = "/demografico/poblacion/" + ano_inicial + "/" + departamento;
+                var url = "/demografico/densidad/" + ano_inicial + "/" + departamento;
             }else {
-                var url = "/demografico/poblacion/" + ano_inicial;
+                var url = "/demografico/densidad/" + ano_inicial;
             }
         }else
         {
             if (departamento){
-                var url="/demografico/poblacion/" + departamento;
+                var url="/demografico/densidad/" + departamento;
             }else
             {
-                var url="/demografico/poblacion/";
+                var url="/demografico/densidad/";
             }
         }
         window.location = url;
@@ -89,43 +89,20 @@ $("#boton-grafo").click(function () {
         {%if departamental%}
         <th class="sortable-numeric">Departamento</th>
         {%endif%}
-        <th class="sortable-numeric">Hombre Urbano</th>
-        <th class="sortable-numeric">Mujer Urbano</th>
-        <th class="sortable-numeric">Hombre Rural</th>
-        <th class="sortable-numeric">Mujer Rural</th>
-        <th class="sortable-numeric">Total Hombres</th>
-        <th class="sortable-numeric">Total Mujeres</th>
+        <th class="sortable-numeric">Total Población</th>
+        <th class="sortable-numeric">Densidad</th>
     </tr>
 </thead>
     {% for dato in datos reversed %}
     <tr class="{% cycle alt, none %}">
-        <td><a href="/demografico/poblacion/{{dato.ano}}/">{{dato.ano}}</a></td>
+        <td><a href="/demografico/densidad/{{dato.ano}}/">{{dato.ano}}</a></td>
         {%if departamental%}
         <td>{{dato.departamento}}</td>
         {%endif%}
-        <td>{{dato.hombre_urbano}}</td>
-        <td>{{dato.mujer_urbano}}</td>
-        <td>{{dato.hombre_rural}}</td>
-        <td>{{dato.mujer_rural}}</td>
-        <td>{{dato.total_hombre}}</td>
-        <td>{{dato.total_mujer}}</td>
+        <td>{{dato.total}}</td>
+        <td>{{dato.densidad|floatformat:2}}</td>
     </tr>
     {%endfor%}
-    <tfoot>
-        <tr class="{%cycle alt, none %}">
-        {%if departamental%}
-        <th colspan="2">Totales</td>
-        {%else%}
-        <th>Totales</td>
-        {%endif%}
-        <th>{{totales.hombre_urbano}}</th>
-        <th>{{totales.mujer_urbano}}</th>
-        <th>{{totales.hombre_rural}}</th>
-        <th>{{totales.mujer_rural}}</th>
-        <th>{{totales.total_hombre}}</th>
-        <th>{{totales.total_hombre}}</th>
-    </tr>
-    </tfoot>
 </table>
 {%block columna_derecha %}
 <div class="bloque">

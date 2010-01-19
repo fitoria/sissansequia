@@ -171,7 +171,7 @@ h2 {
 .bloque {
 	background-image: url(../imagen/bloque.jpg);
 	width:250px;
-	height:160px;
+	height:auto;
 	margin-bottom:15px;
 }
 
