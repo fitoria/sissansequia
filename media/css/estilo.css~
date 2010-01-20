@@ -2,7 +2,6 @@
 
 body {
 	background-color: #454545;
-	background-image: url(../imagen/fondo.jpg);
 	background-repeat: repeat-x;
 	font-family: 'Trebuchet MS', Helvetica, sans-serif;
 	font-size:14px;
@@ -62,7 +61,7 @@ h2 {
 
 #sesion{
 	width:960px;
-	height:45px;
+	height:40px;
 	text-align:right;
 	padding-right:10px;
 	padding-top:5px;
@@ -102,8 +101,11 @@ h2 {
 }
 
 #header_tab {
-	width:700px;
-	height:76px;
+	width:680px;
+	height:105px;
+	margin-left:10px;
+	background:#C9DB8F;
+	padding:10px;
 }
 
 #enlace {
@@ -135,6 +137,19 @@ h2 {
 }
 
 /* --------------Termina Header-------------- */
+
+/* --------------Comienza Menu-------------- */
+
+#menu{
+	width:700px;
+	height:30px;
+	margin-left:10px;
+	background:#fff;
+	float:left;
+	margin-top:5px;
+}
+
+/* --------------Termina Menu-------------- */
 
 
 /* --------------Comienza contenido--------------- */
@@ -171,7 +186,7 @@ h2 {
 .bloque {
 	background-image: url(../imagen/bloque.jpg);
 	width:250px;
-	height:160px;
+	height:auto;
 	margin-bottom:15px;
 }
 
@@ -247,11 +262,11 @@ caption {
 	text-align: right;
 }
 
-table {
+#colum_izq table {
 	width:640px;
 }
 
-th{
+#colum_izq th{
 	font: bold 10px/22px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
 	color: #4f6b72;
 	border-right: 1px solid #C1DAD7;
@@ -265,7 +280,7 @@ th{
 	vertical-align:middle;
 }
 
-td.total{
+#colum_izq td.total{
 	border-top: 0;
 	border-left: 0;
 	border-right: 1px solid #C1DAD7;
@@ -276,36 +291,36 @@ td.total{
 	letter-spacing:1px;
 }
 
-th.sortable,
-th.sortable-text,
-th.sortable-date,
-th.sortable-keep,
-th.sortable-date-dmy,
-th.sortable-numeric,
-th.sortable-currency,
-th.sortable-sortByTwelveHourTimestamp,
-th.sortable-sortIPAddress,
-th.sortable-sortEnglishLonghandDateFormat,
-th.sortable-sortScientificNotation,
-th.sortable-sortImage,
-th.sortable-sortFileSize,
-th.sortable-sortAlphaNumeric,
-th.sortable-sortEnglishDateTime{
+#colum_izq th.sortable,
+#colum_izq th.sortable-text,
+#colum_izq th.sortable-date,
+#colum_izq th.sortable-keep,
+#colum_izq th.sortable-date-dmy,
+#colum_izq th.sortable-numeric,
+#colum_izq th.sortable-currency,
+#colum_izq th.sortable-sortByTwelveHourTimestamp,
+#colum_izq th.sortable-sortIPAddress,
+#colum_izq th.sortable-sortEnglishLonghandDateFormat,
+#colum_izq th.sortable-sortScientificNotation,
+#colum_izq th.sortable-sortImage,
+#colum_izq th.sortable-sortFileSize,
+#colum_izq th.sortable-sortAlphaNumeric,
+#colum_izq th.sortable-sortEnglishDateTime{
 	cursor:pointer;
 	background: #CAE8EA url(../imagen/bg_header_sortable.jpg) no-repeat;
 	padding: 8px 12px 4px 16px;
 }
 
-th.forwardSort{
+#colum_izq th.forwardSort{
 	background:#CAE8EA url(../imagen/bg_header_down.jpg) no-repeat 0 0;
 }
 
-th.reverseSort{
+#colum_izq th.reverseSort{
 	background:#CAE8EA url(../imagen/bg_header_up.jpg) no-repeat 0 0;
 }
 
-table thead th.forwardSort a,
-table thead th.reverseSort a {
+#colum_izq table thead th.forwardSort a,
+#colum_izq table thead th.reverseSort a {
 	color:#000;
 	text-decoration:none;
 }
@@ -323,30 +338,30 @@ th.sort-active a {
 }
 */
 
-th a {
+#colum_izq th a {
 	text-decoration:none;
 	color: #4f6b72;
 	background:transparent;
 }
 
-td a {
+#colum_izq td a {
 	text-decoration:none;
 	color:#239;
 	background:transparent;
 }
 
-td img {
+#colum_izq td img {
 	margin:0 auto;
 	border:3px solid #ddd;
 }
 
-td a:hover {
+#colum_izq td a:hover {
 	color:#a84444;
 	border-bottom:1px dotted #a80000;
 	background:transparent;
 }
 
-td {
+#colum_izq td {
 	font: normal 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
 	border-right: 1px solid #C1DAD7;
 	border-bottom: 1px solid #C1DAD7;
@@ -355,11 +370,11 @@ td {
 	background: #FFFFFF;
 }
 
-td.lft {
+#colum_izq td.lft {
 	text-align:left;
 }
 
-tr.alt {
+#colum_izq tr.alt {
 	background: #F5FAFA;
 	color: #797268;
 }
@@ -367,21 +382,21 @@ tr.alt {
 /* Poor old Internet Explorer 6 has a bug that means we can't use background images for the table rows
    as it trys to download the image each and every time that it is used (which means a 1000 row table
    will produce 1000 http requests for the image in question) */
-tr[class="alt"] td {
+#colum_izq tr[class="alt"] td {
 	background: #F5FAFA url(../media/td_alt.jpg) no-repeat;
 }
 
-td[class~="alt"]{
+#colum_izq td[class~="alt"]{
 	background: #edf3f3 url(../media/col_alt.jpg) no-repeat !important;
 }
 
 /* Poor old Internet Explorer won't see the next two rules either as it doesn't get :first-child */
-tbody tr.alt td:first-child{
+#colum_izq tbody tr.alt td:first-child{
 	background: #F5FAFA url(../imagen/bullet2.gif) no-repeat;
 	font-weight:bold;
 }
 
-tbody tr td:first-child {
+#colum_izq tbody tr td:first-child {
 	background: #fff url(../imagen/bullet1.gif) no-repeat;
 	font-weight:bold;
 }
@@ -398,3 +413,59 @@ background-color:#edf3f3;
 
 /* TERMINA CSS Especial para las tablas */
 
+/*  Esto es para el efecto de la fotos */
+#slider1 {
+    width: 700px;
+    height: 500px;
+    position: relative;
+	overflow: hidden; 
+}
+
+#slider1Content {
+    width: 700px; 
+    position: absolute;
+	top: 0;
+	margin-left: 0;
+}
+.slider1Image {
+    float: left;
+    position: relative;
+	display: none;
+}
+.slider1Image span {
+    position: absolute;
+	font: 10px/15px Arial, Helvetica, sans-serif;
+    padding: 10px 13px;
+    width: 646px;
+    background-color: #000;
+    filter: alpha(opacity=70);
+    -moz-opacity: 0.7;
+	-khtml-opacity: 0.7;
+    opacity: 0.7;
+    color: #fff;
+    display: none;
+}
+.clear {
+	clear: both;
+}
+.slider1Image span strong {
+    font-size: 12px;
+}
+.bottom {
+	bottom: 0;
+    left: 0;
+}
+.left {
+    top: 0;
+    left: 0;
+    width: 100px !important;
+    height: 395px;
+}
+ 
+.right {
+    right: 0;
+    bottom: 0;
+    width: 140px !important;
+    height: 392px;
+}
+ul { list-style-type: none;}
