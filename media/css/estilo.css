@@ -169,23 +169,33 @@ h2 {
 }
 
 .bloque {
-	background-image: url(../imagen/bloque.jpg);
-	width:250px;
+	width:248px;
 	height:auto;
 	margin-bottom:15px;
 }
 
 #b_titulo{
+	background-image: url(../imagen/ayuda-cabeza.png);
 	font-size:20px;
 	padding-left:10px;
+	height:42px;
 	padding-top:3px;
 }
 
 #b_enlace{
-padding:15px;
-color:#D1CFCF;
+	background-image: url(../imagen/ayuda-centro.png);
+	background-repeat: repeat-y;
+    padding:15px;
+	height:auto;
+    color:#D1CFCF;
+    width: 223px;
 }
 
+#b_footer{
+	background-image: url(../imagen/ayuda-pie.png);
+    width: 248px;
+    height: 17px
+}
 #b_enlace a {
 	color:#D1CFCF;
 	text-decoration:none;
