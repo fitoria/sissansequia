@@ -142,11 +142,11 @@ h2 {
 
 #menu{
 	width:700px;
-	height:40px;
+	height:48px;
 	margin-left:10px;
-	background:#fff;
 	float:left;
-	margin-top:5px;
+	background-image: url(../imagen/fondomenuprincipal.png);
+	background-repeat: no-repeat;
 }
 
 /* --------------Termina Menu-------------- */
