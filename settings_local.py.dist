@@ -19,3 +19,4 @@ DATABASE_PORT = ''             # Set to empty string for default. Not used with 
 
 TIME_ZONE = 'America/Managua'
 LANGUAGE_CODE = 'es-ni'
+NO_DATA_GRAPH_URL = '/imagen/grafosindatos.png'
