@@ -1,4 +1,4 @@
- # -*- coding: UTF-8 -*-
+# -*- coding: UTF-8 -*-
  
 from django.shortcuts import render_to_response
 from models import Encuesta
@@ -275,86 +275,36 @@ def nutricion(request):
         nutri = Encuesta.objects.all()
         
     casos = nutri.count()
-    #TODO: hacer sumas otra ves :P, rango 1 - 5  niños
-    ninos_normal = 0
-    ninos_riesgo = 0
-    ninos_desnutrido = 0
-    ninos_nosabe = 0
-    ninos_normal_s = 0
-    ninos_riesgo_s = 0
-    ninos_desnutrido_s = 0
-    ninos_nosabe_s = 0
-    ninos_normal_o = 0
-    ninos_riesgo_o = 0
-    ninos_desnutrido_o = 0
-    ninos_nosabe_o = 0
-    #niñas
-    ninas_normal = 0
-    ninas_riesgo = 0
-    ninas_desnutrido = 0
-    ninas_nosabe = 0
-    ninas_normal_s = 0
-    ninas_riesgo_s = 0
-    ninas_desnutrido_s = 0
-    ninas_nosabe_s = 0
-    ninas_normal_o = 0
-    ninas_riesgo_o = 0
-    ninas_desnutrido_o = 0
-    ninas_nosabe_o = 0
-    for encuesta in nutri:
-        for nutricion in encuesta.nutricion.filter(edad__range=(1,5)).filter(ninos__contains="ninos").filter(brazalete__id=1):
-            ninos_normal = 1 + ninos_normal
-        for nutricion in encuesta.nutricion.filter(edad__range=(1,5)).filter(ninos__contains="ninos").filter(brazalete__id=4):
-            ninos_riesgo = 1 + ninos_riesgo
-        for nutricion in encuesta.nutricion.filter(edad__range=(1,5)).filter(ninos__contains="ninos").filter(brazalete__id=3):
-            ninos_desnutrido = 1 + ninos_desnutrido
-        for nutricion in encuesta.nutricion.filter(edad__range=(1,5)).filter(ninos__contains="ninos").filter(brazalete__id=5):
-            ninos_nosabe = 1 + ninos_nosabe
+    # niños de 1-5 años
+    ninos_normal = nutri.filter(nutricion__edad__range=(1,5), nutricion__ninos__contains="ninos",  nutricion__brazalete__id=1).count()
+    ninos_riesgo = nutri.filter(nutricion__edad__range=(1,5), nutricion__ninos__contains="ninos",  nutricion__brazalete__id=4).count()
+    ninos_desnutrido = nutri.filter(nutricion__edad__range=(1,5), nutricion__ninos__contains="ninos",  nutricion__brazalete__id=3).count()
+    ninos_nosabe = nutri.filter(nutricion__edad__range=(1,5), nutricion__ninos__contains="ninos",  nutricion__brazalete__id=5).count()
         #rango 6-10
-        for nutricion in encuesta.nutricion.filter(edad__range=(6,10)).filter(ninos__contains="ninos").filter(brazalete__id=1):
-            ninos_normal_s = 1 + ninos_normal_s
-        for nutricion in encuesta.nutricion.filter(edad__range=(6,10)).filter(ninos__contains="ninos").filter(brazalete__id=4):
-            ninos_riesgo_s = 1 + ninos_riesgo_s
-        for nutricion in encuesta.nutricion.filter(edad__range=(6,10)).filter(ninos__contains="ninos").filter(brazalete__id=3):
-            ninos_desnutrido_s = 1 + ninos_desnutrido_s
-        for nutricion in encuesta.nutricion.filter(edad__range=(6,10)).filter(ninos__contains="ninos").filter(brazalete__id=5):
-            ninos_nosabe_s = 1 + ninos_nosabe_s
+    ninos_normal_s = nutri.filter(nutricion__edad__range=(6,10), nutricion__ninos__contains="ninos",  nutricion__brazalete__id=1).count()
+    ninos_riesgo_s = nutri.filter(nutricion__edad__range=(6,10), nutricion__ninos__contains="ninos",  nutricion__brazalete__id=4).count()
+    ninos_desnutrido_s = nutri.filter(nutricion__edad__range=(6,10), nutricion__ninos__contains="ninos",  nutricion__brazalete__id=3).count()
+    ninos_nosabe_s = nutri.filter(nutricion__edad__range=(6,10), nutricion__ninos__contains="ninos",  nutricion__brazalete__id=5).count()
         #rango mayor 11
-        for nutricion in encuesta.nutricion.filter(edad__gt=11).filter(ninos__contains="ninos").filter(brazalete__id=1):
-            ninos_normal_o = 1 + ninos_normal_o
-        for nutricion in encuesta.nutricion.filter(edad__gt=11).filter(ninos__contains="ninos").filter(brazalete__id=4):
-            ninos_riesgo_o = 1 + ninos_riesgo_o
-        for nutricion in encuesta.nutricion.filter(edad__gt=11).filter(ninos__contains="ninos").filter(brazalete__id=3):
-            ninos_desnutrido_o = 1 + ninos_desnutrido_o
-        for nutricion in encuesta.nutricion.filter(edad__gt=11).filter(ninos__contains="ninos").filter(brazalete__id=5):
-            ninos_nosabe_o = 1 + ninos_nosabe_o
+    ninos_normal_o = nutri.filter(nutricion__edad__range=(11,15), nutricion__ninos__contains="ninos",  nutricion__brazalete__id=1).count()
+    ninos_riesgo_o = nutri.filter(nutricion__edad__range=(11,15), nutricion__ninos__contains="ninos",  nutricion__brazalete__id=4).count()
+    ninos_desnutrido_o = nutri.filter(nutricion__edad__range=(11,15), nutricion__ninos__contains="ninos",  nutricion__brazalete__id=3).count()
+    ninos_nosabe_o = nutri.filter(nutricion__edad__range=(11,15), nutricion__ninos__contains="ninos",  nutricion__brazalete__id=5).count()
     #ahora vamos con las niñas :)
-        for nutricion in encuesta.nutricion.filter(edad__range=(1,5)).filter(ninos__contains="ninas").filter(brazalete__id=1):
-            ninas_normal = 1 + ninas_normal
-        for nutricion in encuesta.nutricion.filter(edad__range=(1,5)).filter(ninos__contains="ninas").filter(brazalete__id=4):
-            ninas_riesgo = 1 + ninas_riesgo
-        for nutricion in encuesta.nutricion.filter(edad__range=(1,5)).filter(ninos__contains="ninas").filter(brazalete__id=3):
-            ninas_desnutrido = 1 + ninas_desnutrido
-        for nutricion in encuesta.nutricion.filter(edad__range=(1,5)).filter(ninos__contains="ninas").filter(brazalete__id=5):
-            ninas_nosabe = 1 + ninas_nosabe
+    ninas_normal = nutri.filter(nutricion__edad__range=(1,5), nutricion__ninos__contains="ninas",  nutricion__brazalete__id=1).count()
+    ninas_riesgo = nutri.filter(nutricion__edad__range=(1,5), nutricion__ninos__contains="ninas",  nutricion__brazalete__id=4).count()
+    ninas_desnutrido = nutri.filter(nutricion__edad__range=(1,5), nutricion__ninos__contains="ninas",  nutricion__brazalete__id=3).count()
+    ninas_nosabe = nutri.filter(nutricion__edad__range=(1,5), nutricion__ninos__contains="ninas",  nutricion__brazalete__id=5).count()
         #rango 6-10
-        for nutricion in encuesta.nutricion.filter(edad__range=(6,10)).filter(ninos__contains="ninas").filter(brazalete__id=1):
-            ninas_normal_s = 1 + ninas_normal_s
-        for nutricion in encuesta.nutricion.filter(edad__range=(6,10)).filter(ninos__contains="ninas").filter(brazalete__id=4):
-            ninas_riesgo_s = 1 + ninas_riesgo_s
-        for nutricion in encuesta.nutricion.filter(edad__range=(6,10)).filter(ninos__contains="ninas").filter(brazalete__id=3):
-            ninas_desnutrido_s = 1 + ninas_desnutrido_s
-        for nutricion in encuesta.nutricion.filter(edad__range=(6,10)).filter(ninos__contains="ninas").filter(brazalete__id=5):
-            ninas_nosabe_s = 1 + ninas_nosabe_s
+    ninas_normal_s = nutri.filter(nutricion__edad__range=(6,10), nutricion__ninos__contains="ninas",  nutricion__brazalete__id=1).count()
+    ninas_riesgo_s = nutri.filter(nutricion__edad__range=(6,10), nutricion__ninos__contains="ninas",  nutricion__brazalete__id=4).count()
+    ninas_desnutrido_s = nutri.filter(nutricion__edad__range=(6,10), nutricion__ninos__contains="ninas",  nutricion__brazalete__id=3).count()
+    ninas_nosabe_s = nutri.filter(nutricion__edad__range=(6,10), nutricion__ninos__contains="ninas",  nutricion__brazalete__id=5).count()
         #rango mayor 11
-        for nutricion in encuesta.nutricion.filter(edad__gt=11).filter(ninos__contains="ninas").filter(brazalete__id=1):
-            ninas_normal_o = 1 + ninas_normal_o
-        for nutricion in encuesta.nutricion.filter(edad__gt=11).filter(ninos__contains="ninas").filter(brazalete__id=4):
-            ninas_riesgo_o = 1 + ninas_riesgo_o
-        for nutricion in encuesta.nutricion.filter(edad__gt=11).filter(ninos__contains="ninas").filter(brazalete__id=3):
-            ninas_desnutrido_o = 1 + ninas_desnutrido_o
-        for nutricion in encuesta.nutricion.filter(edad__gt=11).filter(ninos__contains="ninas").filter(brazalete__id=5):
-            ninas_nosabe_o = 1 + ninas_nosabe_o
+    ninas_normal_o = nutri.filter(nutricion__edad__range=(11,15), nutricion__ninos__contains="ninas",  nutricion__brazalete__id=1).count()
+    ninas_riesgo_o = nutri.filter(nutricion__edad__range=(11,15), nutricion__ninos__contains="ninas",  nutricion__brazalete__id=4).count()
+    ninas_desnutrido_o = nutri.filter(nutricion__edad__range=(11,15), nutricion__ninos__contains="ninas",  nutricion__brazalete__id=3).count()
+    ninas_nosabe_o = nutri.filter(nutricion__edad__range=(11,15), nutricion__ninos__contains="ninas",  nutricion__brazalete__id=5).count()
     
     
     return render_to_response("encuesta/nutricion.html", locals())
@@ -562,24 +512,19 @@ def grafo_nutricion(request):
         gnutri = Encuesta.objects.all()
         
     casos = gnutri.count()
-    normal_v = 0
-    desnutrido_v = 0
-    riesgo_v = 0
-    nosabe_v = 0
-    normal_m = 0
-    desnutrido_m = 0
-    riesgo_m = 0
-    nosabe_m = 0
+#    normal_v = 0
+#    desnutrido_v = 0
+#    riesgo_v = 0
+#    nosabe_v = 0
+#    normal_m = 0
+#    desnutrido_m = 0
+#    riesgo_m = 0
+#    nosabe_m = 0
     # solo para niños
-    for encuesta in gnutri:
-        for nutricion in encuesta.nutricion.filter(ninos__contains="ninos").filter(brazalete__id=1):
-            normal_v = 1 + normal_v
-        for nutricion in encuesta.nutricion.filter(ninos__contains="ninos").filter(brazalete__id=3):
-            desnutrido_v = 1 + desnutrido_v
-        for nutricion in encuesta.nutricion.filter(ninos__contains="ninos").filter(brazalete__id=4):
-            riesgo_v = 1 + riesgo_v
-        for nutricion in encuesta.nutricion.filter(edad__range=(1,15), ninos__contains="ninos", brazalete__id=5):
-            nosabe_v = 1 + nosabe_v
+    normal_v = gnutri.filter(nutricion__ninos__contains="ninos", nutricion__brazalete__id=1).count()
+    desnutrido_v = gnutri.filter(nutricion__ninos__contains="ninos", nutricion__brazalete__id=3).count()
+    riesgo_v = gnutri.filter(nutricion__ninos__contains="ninos", nutricion__brazalete__id=4).count()
+    nosabe_v = gnutri.filter(nutricion__edad__range=(1,15), nutricion__ninos__contains="ninos", nutricion__brazalete__id=5).count()
     #total de la tabla para niños
     total_v = normal_v + desnutrido_v + riesgo_v + nosabe_v
     #mandando los datos para el porcentaje del grafico niños
@@ -588,15 +533,10 @@ def grafo_nutricion(request):
     p_riesgo_v = float(riesgo_v) / total_v
     p_nosabe_v = float(nosabe_v) / total_v
     # solo para niñas
-    for encuesta in gnutri:
-        for nutricion in encuesta.nutricion.filter(ninos__contains="ninas").filter(brazalete__id=1):
-            normal_m = 1 + normal_m
-        for nutricion in encuesta.nutricion.filter(ninos__contains="ninas").filter(brazalete__id=3):
-            desnutrido_m = 1 + desnutrido_m
-        for nutricion in encuesta.nutricion.filter(ninos__contains="ninas").filter(brazalete__id=4):
-            riesgo_m = 1 + riesgo_m
-        for nutricion in encuesta.nutricion.filter(edad__range=(1,15), ninos__contains="ninas", brazalete__id=5):
-            nosabe_m = 1 + nosabe_m
+    normal_m = gnutri.filter(nutricion__ninos__contains="ninas", nutricion__brazalete__id=1).count()
+    desnutrido_m = gnutri.filter(nutricion__ninos__contains="ninas", nutricion__brazalete__id=3).count()
+    riesgo_m = gnutri.filter(nutricion__ninos__contains="ninas", nutricion__brazalete__id=4).count()
+    nosabe_m = gnutri.filter(nutricion__edad__range=(1,15), nutricion__ninos__contains="ninas", nutricion__brazalete__id=5).count()
     #total de la tabla para niñas
     total_m = normal_m + desnutrido_m + riesgo_m + nosabe_m 
     #mandando los datos para el porcentaje del grafico niños
@@ -611,11 +551,12 @@ def grafo_nutricion(request):
     legends2 = ['Normal','Desnutrido','Riesgo desnutricion','No sabe']
     mensa1 = "Grafico Nutrición Niños"
     mensa2 = "Grafico Nutrición Niñas"
-    #los link :)
+    #los link para los grafos :)
     url = grafos.make_graph(lista1,legends1,mensa1,return_json=False)
     url1 = grafos.make_graph(lista2,legends2,mensa2,return_json=False)
     
     return render_to_response("encuesta/grafo_nutricion.html", locals())
+
 
 @session_required
 def grafo_disponibilidad(request):

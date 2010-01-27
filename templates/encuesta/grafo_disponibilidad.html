@@ -5,3 +5,18 @@ Números de casos: {{ casos }} familias
     <img src={{grafo_disp}} />  <img src={{grafo_disp_formula}} />
 
 {% endblock %}
+{%block columna_derecha%}
+<div class="bloque">
+    <div id="b_titulo">Enlaces</div>
+    <div id="b_enlace">
+        <ul>
+            <li><a href="/sequia/index/">Formulario de Consulta</a></li>
+            <li><a href="/sequia/perdida/">Pérdida de cosecha</a></li>
+            <li><a href="/sequia/disponibilidad/">Disponibilidad de Alimentos</a></li>
+            <li><a href="/sequia/nutricion/">Nutrición</a></li>
+            <li><a href="/sequia/descargar/xls/">Exportar a Hoja de Cálculo</a></li>
+        </ul>
+    </div>
+    <div id="b_footer"></div>
+</div>
+{%endblock%}

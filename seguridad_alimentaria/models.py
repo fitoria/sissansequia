@@ -27,7 +27,7 @@ class DependenciaAlimentaria(models.Model):
     porcentaje = models.DecimalField(max_digits=10, decimal_places=2, editable=False)
 
     def save(self, force_insert=False, force_update=False):
-        self.rendimiento = self.produccion/self.area
+        self.rendimiento = self.produccion/self.area if self.area>0 else 0
         self.dependencia_alimentaria = self.produccion + self.importaciones + self.donaciones - self.exportaciones
         self.porcentaje = ((self.importaciones + self.donaciones)/self.dependencia_alimentaria)*100 
         super(DependenciaAlimentaria, self).save(force_insert, force_update)

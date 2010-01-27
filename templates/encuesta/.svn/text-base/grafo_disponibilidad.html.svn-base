@@ -1,8 +1,0 @@
-{% extends 'index.html' %}
-
-{% block content %}
-Números de casos: {{ casos }} familias
-<div class="titulografo"><h2>Gráficos de Disponibilidad</h2></div>
-    <img src={{grafo_disp}} />  <img src={{grafo_disp_formula}} />
-
-{% endblock %}
