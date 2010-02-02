@@ -129,10 +129,10 @@
 							<!-- start horizontal menu -->
 
 							<table class="rootVoices" cellspacing='0' cellpadding='0' border='0'><tr>
-							  <td class="rootVoice {menu: 'menu_1'}" >Información Demográfica</td>
+							  <td class="rootVoice {menu: 'menu_1'}"  >Información Demográfica</td>
 							  <td class="rootVoice {menu: 'menu_2'}" >Seguridad Alimentaria</td>
 							  <td class="rootVoice {menu: 'menu_3'}" >Soberania Alimentaria</td>
-							  <td class="rootVoice {menu: 'menu_4'}" >Monitoreo Sequia</td>
+							 <td class="rootVoice {menu: 'menu_'}" onclick="window.location='/sequia/index/'" >Monitoreo Sequia</td>
 							</tr></table>
 
 							<!-- end horizontal menu -->
@@ -156,13 +156,7 @@
 				  <a class="{action: 'empty', img: 'apertura-comercial.png'}" href="/seguridad-alimentaria/apertura-comercial/">Apertura Comercial</a>
 				  <!--<a class="{action: 'empty', img: 'formacion-de-capital.png'}" href="#">Formación de capital</a>-->
 				</div>
-				<div id="menu_4" class="mbmenu">
-				  <a class="{action: 'empty', img: '24-tag-add.png'}" href="/sequia/index/">Formulario de Consulta</a>
-				  <a class="{action: 'empty', img: '24-tag-add.png'}" href="/sequia/perdida/">Pérdida de cosecha</a>
-				  <a class="{action: 'empty', img: '24-tag-add.png'}" href="/sequia/disponibilidad/">Disponibilidad de alimentos</a>
-				  <a class="{action: 'empty', img: '24-tag-add.png'}" href="/sequia/nutricion/">Nutrición</a>
-				  <a class="{action: 'empty', img: '24-tag-add.png'}" href="/sequia/descargar/xls/">Exportar hoja de cálculo</a>
-				</div>
+		
 				<div id="sub_menu_1" class="mbmenu">
 					<a class="{action: 'empty', img: 'empleo.png'}" href="/economico/empleo/">Empleo</a>
 					<a class="{action: 'empty', img: 'salario-minimo.png'}" href="/economico/salario-minimo/">Salario Mínimo</a>
@@ -192,7 +186,7 @@
 {% block columna_derecha %}
 {% endblock %}
               </div>
-               <div id="separador" ></div>
+               <div class="separador" ></div>
             </div>
             
 

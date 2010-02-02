@@ -189,6 +189,8 @@ h2 {
 	margin-bottom:15px;
 }
 
+
+
 #b_titulo{
 	background-image: url(../imagen/ayuda-cabeza.png);
 	font-size:20px;
@@ -197,6 +199,46 @@ h2 {
 	padding-top:3px;
 }
 
+#tabs a,#tabs a:visited{
+	color:#fff;
+	text-decoration:none;
+}
+#tabs a:hover #boton-grafo{
+	color:#fff;
+	text-decoration:none;
+	text-shadow:0 1px 0 #000;
+	background: #000 url(../imagen/grafo.png);
+	background-repeat:no-repeat ;
+}
+#tabs a:hover #boton-tabla{
+	color:#fff;
+	text-decoration:none;
+	text-shadow:0 1px 0 #000;
+	background: #000 url(../imagen/tabla.png);
+	background-repeat:no-repeat ;
+}
+.boton-tab{
+	font-style:bold;
+	padding-right:10px;
+	padding-left:35px;
+	padding-top:4px;
+	width:125px;
+	height:24px;
+	float:left;
+	margin-right:5px;
+	border:1px solid #191919;
+	-moz-border-radius:3px; /* Firefox */
+    -webkit-border-radius:3px; /* Safari y Chrome */ 
+}
+#boton-grafo{
+	background: #333 url(../imagen/grafo.png);
+	background-repeat:no-repeat ;
+}
+
+#boton-tabla{
+	background: #333 url(../imagen/tabla.png);
+	background-repeat: no-repeat;
+}
 #b_enlace{
 	background-image: url(../imagen/ayuda-centro.png);
 	background-repeat: repeat-y;
@@ -216,8 +258,24 @@ h2 {
 	text-decoration:none;
 }
 
-
-#separador {
+.lista_sidebar ul{
+text-align:left;
+list-style:none;list-style-position:inside;
+padding:0px
+}
+.lista_sidebar li{
+margin-left:0px;
+margin-bottom:5px;
+border-bottom:1px solid #474747;
+width:100%;
+}
+.lista_sidebar li a{
+color:#000;
+}
+.lista_sidebar li a:hover{
+color:#fff;
+}
+.separador {
 	clear:both;
 }
 
@@ -268,7 +326,7 @@ caption {
 	padding: 0 0 5px 0;
 	margin:0 auto;
 	width:auto;
-	font: italic 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+	font: italic 13px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
 	text-align: right;
 }
 

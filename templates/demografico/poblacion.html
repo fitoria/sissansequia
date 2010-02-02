@@ -12,6 +12,9 @@ for(i=3; i<=tope; i++)
     parametros+= cadena[i] + "/";
 }
 var url = "/demografico/grafo/poblacion" + parametros;
+$("#boton-tabla").click(function () { 
+	 $("#grafo").replaceWith('<div id="grafo"></div>');
+});
 $("#boton-grafo").click(function () { 
     $.getJSON(url, 
        function(data){
@@ -78,10 +81,12 @@ $("#boton-grafo").click(function () {
 
     <input type="button" name="boton" value="Filtrar" onClick="procesarFormulario(this.form)"/>
 </form>
-<div id="boton-grafo"><a href="#">Gráfico</a></div>
+<div id="tabs"><a href="#"><div id="boton-tabla" class="boton-tab">Tabla</div></a><a href="#"><div id="boton-grafo" class="boton-tab">Gráfico</div></a></div>
+<div class="separador" ></div>
 <div id="grafo"></div>
-{{mensaje}}
+
 <table>
+<caption>{{mensaje}}</caption>
     <thead>
     <tr>
         <th class="sortable-numeric">Año</th>
