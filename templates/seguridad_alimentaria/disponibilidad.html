@@ -11,6 +11,10 @@ for(i=3; i<=tope; i++)
     parametros+= cadena[i] + "/";
 }
 var url = "/" + cadena[1] + "/grafo/" + cadena[2] + parametros;
+$("#boton-tabla").click(function () { 
+	 $("#grafo-consumos").replaceWith('<div id="grafo-consumos"></div>');
+	 $("#grafo-disponibilidades").replaceWith('<div id="grafo-disponibilidades"></div>');
+});
 $("#boton-grafo-disponibilidades").click(function () { 
     $.getJSON(url, 
        function(data){
@@ -88,8 +92,9 @@ $("#boton-grafo-consumos").click(function () {
     </select>
     <input type="button" value="Filtrar" onClick="procesarFormulario(this.form)"/>
 </form>
-<div id="boton-grafo-disponibilidades"><a href="#">Gráfico Disponbilidad</a></div>
-<div id="boton-grafo-consumos"><a href="#">Gráfico Consumo Aparente</a></div>
+<div id="tabs"><a href="#"><div id="boton-tabla" class="boton-tab">Tabla</div></a>
+    <a href="#"><div id="boton-grafo-disponibilidades" class="boton-tab">Gráfico Disponibilidad</div></a>
+<a href="#"><div id="boton-grafo-consumos" class="boton-tab">Gráfico Consumo Aparente</div></a></div>
 <div id="grafo-consumos"></div>
 <div id="grafo-disponibilidades"></div>
 {{mensaje}}

@@ -11,6 +11,9 @@ for(i=3; i<=tope; i++)
     parametros+= cadena[i] + "/";
 }
 var url = "/" + cadena[1] + "/grafo/" + cadena[2] + parametros;
+$("#boton-tabla").click(function () { 
+	 $("#grafo").replaceWith('<div id="grafo"></div>');
+});
 $("#boton-grafo").click(function () { 
     $.getJSON(url, 
        function(data){
@@ -57,10 +60,10 @@ $("#boton-grafo").click(function () {
     </select>
     <input type="button" value="Filtrar" onClick="procesarFormulario(this.form)"/>
 </form>
-<div id="boton-grafo"><a href="#">Gráfico</a></div>
+<div id="tabs"><a href="#"><div id="boton-tabla" class="boton-tab">Tabla</div></a><a href="#"><div id="boton-grafo" class="boton-tab">Gráfico</div></a></div>
 <div id="grafo"></div>
-{{mensaje}}
 <table>
+<caption>{{mensaje}}</caption>
     <tr>
         <th class="sortable-numeric">
             Año

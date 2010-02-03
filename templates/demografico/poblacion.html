@@ -16,6 +16,7 @@ $("#boton-tabla").click(function () {
 	 $("#grafo").replaceWith('<div id="grafo"></div>');
 });
 $("#boton-grafo").click(function () { 
+<div id="boton-grafo-consumos"><a href="#">Gráfico Consumo Aparente</a></div>
     $.getJSON(url, 
        function(data){
            if(flip++ % 2 == 0){
@@ -78,6 +79,7 @@ $("#boton-grafo").click(function () {
         <option value="{{dep.slug}}">{{dep.nombre}}</option>
         {%endfor%}
     </select>
+<div id="boton-grafo-consumos"><a href="#">Gráfico Consumo Aparente</a></div>
 
     <input type="button" name="boton" value="Filtrar" onClick="procesarFormulario(this.form)"/>
 </form>

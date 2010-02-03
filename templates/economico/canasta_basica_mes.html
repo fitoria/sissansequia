@@ -11,6 +11,9 @@ for(i=3; i<=tope; i++)
     parametros+= cadena[i] + "/";
 }
 var url = "/economico/grafo/canasta-basica" + parametros;
+$("#boton-tabla").click(function () { 
+	 $("#grafo").replaceWith('<div id="grafo"></div>');
+});
 $("#boton-grafo").click(function () { 
     $.getJSON(url, 
        function(data){
@@ -78,10 +81,11 @@ $("#boton-grafo").click(function () {
     </select>
     <input type="button" value="Filtar" name="boton" id="id_boton" onClick="procesarFormulario(this.form)"/>
 </form>
-<div id="boton-grafo"><a href="#">Gráfico</a></div>
+<div id="tabs"><a href="#"><div id="boton-tabla" class="boton-tab">Tabla</div></a><a href="#"><div id="boton-grafo" class="boton-tab">Gráfico</div></a></div>
+<div class="separador" ></div>
 <div id="grafo"></div>
-Canasta Básica
 <table>
+    <caption>Canasta Básica</caption>
     <tr>
         <th class="sortable-numeric">
             Año

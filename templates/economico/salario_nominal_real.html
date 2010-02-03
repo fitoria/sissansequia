@@ -11,6 +11,10 @@ for(i=3; i<=tope; i++)
     parametros+= cadena[i] + "/";
 }
 var url = "/" + cadena[1] + "/grafo/" + cadena[2] + parametros;
+$("#boton-tabla").click(function () { 
+	 $("#grafo-real").replaceWith('<div id="grafo-real"></div>');
+	 $("#grafo-nominal").replaceWith('<div id="grafo-nominal"></div>');
+});
 $("#boton-grafo-nominal").click(function () { 
     $.getJSON(url, 
        function(data){
@@ -68,12 +72,17 @@ $("#boton-grafo-real").click(function () {
     </select>
     <input type="button" value="Filtar" name="boton" id="id_boton" onClick="procesarFormulario(this.form)"/>
 </form>
-<div id="boton-grafo-real"><a href="#">Gráfico Salario Mínimo Nominal</a></div>
-<div id="boton-grafo-nominal"><a href="#">Gráfico Salario Mínimo Real</a></div>
+<div id="tabs">
+    <a href="#"><div id="boton-tabla" class="boton-tab">Tabla</div></a>
+    <a href="#"><div id="boton-grafo-nominal" class="boton-tab">Gráfico Salario Nominal</div></a>
+    <a href="#"><div id="boton-grafo-real" class="boton-tab">Gráfico Salario Real</div></a>
+</div>
+<div class="separador" ></div>
 <div id="grafo-nominal"></div>
-<br/>
+<div class="separador" ></div>
 <div id="grafo-real"></div>
 <table>
+    <caption>Salario Nominal y Salario Real</caption>
     <tr>
         <th class="sortable-numeric">
             Año
