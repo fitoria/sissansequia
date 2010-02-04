@@ -11,17 +11,13 @@ for(i=3; i<=tope; i++)
     parametros+= cadena[i] + "/";
 }
 var url = "/" + cadena[1] + "/grafo/" + cadena[2] + parametros;
-$("#boton-tabla").click(function () { 
+$(".boton-tabla").click(function () { 
 	 $("#grafo").replaceWith('<div id="grafo"></div>');
 });
-$("#boton-grafo").click(function () { 
+$(".boton-grafo").click(function () { 
     $.getJSON(url, 
        function(data){
-           if(flip++ % 2 == 0){
                $("#grafo").replaceWith('<div id="grafo"><img src="' + data.url + '" /></div>');
-           }else{
-               $("#grafo").replaceWith('<div id="grafo"></div>');
-           }
        });
    });   
 });
@@ -60,7 +56,7 @@ $("#boton-grafo").click(function () {
     </select>
     <input type="button" value="Filtrar" onClick="procesarFormulario(this.form)"/>
 </form>
-<div id="tabs"><a href="#"><div id="boton-tabla" class="boton-tab">Tabla</div></a><a href="#"><div id="boton-grafo" class="boton-tab">Gráfico</div></a></div>
+<div id="tabs"><a href="#"><div class="boton-tabla">Tabla</div></a><a href="#"><div class="boton-grafo">Gráfico</div></a></div>
 <div id="grafo"></div>
 <table>
 <caption>{{mensaje}}</caption>

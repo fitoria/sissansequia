@@ -202,40 +202,51 @@ h2 {
 #tabs a,#tabs a:visited{
 	color:#fff;
 	text-decoration:none;
+	font-size:12px;
 }
-#tabs a:hover #boton-grafo{
+#tabs a:hover .boton-grafo{
 	color:#fff;
 	text-decoration:none;
 	text-shadow:0 1px 0 #000;
 	background: #000 url(../imagen/grafo.png);
 	background-repeat:no-repeat ;
 }
-#tabs a:hover #boton-tabla{
+#tabs a:hover .boton-tabla{
 	color:#fff;
 	text-decoration:none;
 	text-shadow:0 1px 0 #000;
 	background: #000 url(../imagen/tabla.png);
 	background-repeat:no-repeat ;
 }
-.boton-tab{
+
+.boton-grafo{
 	font-style:bold;
 	padding-right:10px;
 	padding-left:35px;
 	padding-top:4px;
-	width:125px;
+	width:145px;
 	height:24px;
 	float:left;
 	margin-right:5px;
 	border:1px solid #191919;
 	-moz-border-radius:3px; /* Firefox */
     -webkit-border-radius:3px; /* Safari y Chrome */ 
-}
-#boton-grafo{
 	background: #333 url(../imagen/grafo.png);
 	background-repeat:no-repeat ;
 }
 
-#boton-tabla{
+.boton-tabla{
+	font-style:bold;
+	padding-right:10px;
+	padding-left:35px;
+	padding-top:4px;
+	min-width:145px;
+	height:24px;
+	float:left;
+	margin-right:5px;
+	border:1px solid #191919;
+	-moz-border-radius:3px; /* Firefox */
+    -webkit-border-radius:3px; /* Safari y Chrome */ 
 	background: #333 url(../imagen/tabla.png);
 	background-repeat: no-repeat;
 }

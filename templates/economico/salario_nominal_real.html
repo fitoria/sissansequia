@@ -11,28 +11,23 @@ for(i=3; i<=tope; i++)
     parametros+= cadena[i] + "/";
 }
 var url = "/" + cadena[1] + "/grafo/" + cadena[2] + parametros;
-$("#boton-tabla").click(function () { 
+$(".boton-tabla").click(function () { 
 	 $("#grafo-real").replaceWith('<div id="grafo-real"></div>');
 	 $("#grafo-nominal").replaceWith('<div id="grafo-nominal"></div>');
 });
-$("#boton-grafo-nominal").click(function () { 
-    $.getJSON(url, 
-       function(data){
-           if(flip++ % 2 == 0){
-               $("#grafo-real").replaceWith('<div id="grafo-real"><img src="' + data.url_real+ '" /></div>');
-           }else{
-               $("#grafo-real").replaceWith('<div id="grafo-real"></div>');
-           }
-       });
-   });   
 $("#boton-grafo-real").click(function () { 
     $.getJSON(url, 
        function(data){
-           if(flip++ % 2 == 0){
-               $("#grafo-nominal").replaceWith('<div id="grafo-nominal"><img src="' + data.url_nominal + '" /></div>');
-           }else{
                $("#grafo-nominal").replaceWith('<div id="grafo-nominal"></div>');
-           }
+               $("#grafo-real").replaceWith('<div id="grafo-real"><img src="' + data.url_real + '" /></div>');
+               
+       });
+   });   
+$("#boton-grafo-nominal").click(function () { 
+    $.getJSON(url, 
+       function(data){
+               $("#grafo-real").replaceWith('<div id="grafo-real"></div>');
+               $("#grafo-nominal").replaceWith('<div id="grafo-nominal"><img src="' + data.url_nominal + '" /></div>');
        });
    });   
 });
@@ -73,9 +68,9 @@ $("#boton-grafo-real").click(function () {
     <input type="button" value="Filtar" name="boton" id="id_boton" onClick="procesarFormulario(this.form)"/>
 </form>
 <div id="tabs">
-    <a href="#"><div id="boton-tabla" class="boton-tab">Tabla</div></a>
-    <a href="#"><div id="boton-grafo-nominal" class="boton-tab">Gráfico Salario Nominal</div></a>
-    <a href="#"><div id="boton-grafo-real" class="boton-tab">Gráfico Salario Real</div></a>
+    <a href="#"><div class="boton-tabla">Tabla</div></a>
+    <a href="#"><div id="boton-grafo-nominal" class="boton-grafo">Gráfico Salario Nominal</div></a>
+    <a href="#"><div id="boton-grafo-real" class="boton-grafo">Gráfico Salario Real</div></a>
 </div>
 <div class="separador" ></div>
 <div id="grafo-nominal"></div>
