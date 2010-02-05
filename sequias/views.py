@@ -666,6 +666,7 @@ def grafo_disponibilidad(request):
     return direct_to_template(request, "encuesta/grafo_disponibilidad.html", dicc)
 
 def __hoja_calculo__(request):
+    print "hoja calculo"
     fecha1=request.session['fecha_inicio']
     fecha2=request.session['fecha_final']
     if request.session['comunidad']:
@@ -699,7 +700,10 @@ def __hoja_calculo__(request):
     for encuesta in encuestas:
         fila = []
         fila.append(encuesta.entrevistado.all()[0].nombre)
-        fila.append(encuesta.entrevistado.all()[0].comunidad.nombre)
+        try:
+            fila.append(encuesta.entrevistado.all()[0].comunidad.nombre)
+        except:
+            fila.append("")
         #primera producto    primera area sembrada   primera area cosechada  primera produccion  razon
         productos = Producto.objects.all()
         #primera
