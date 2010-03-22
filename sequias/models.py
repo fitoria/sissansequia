@@ -48,7 +48,7 @@ class Producto(models.Model):
     def __unicode__(self):
         return self.nombre
 class Perdida(models.Model):
-    nombre = models.CharField('Nombre o Razón de pérdida', max_length=200, help_text="Introduzca la Razón de la perdida")
+    nombre = models.CharField('Nombre o Razón de pérdida', max_length=200, help_text="Introduzca la Razón de la perdida", unique = True)
     
     class Meta:
         verbose_name_plural = "Razon de perdida"
@@ -64,8 +64,9 @@ class Primera(models.Model):
     content_object = generic.GenericForeignKey()
 #    producto = models.IntegerField(choices=PRODUCTO_CHOICES)
     producto = models.ForeignKey(Producto)
+    planea_siembra = models.DecimalField('Area planificada a sembrar', max_digits=10, decimal_places=2, help_text="Introduzca el area planificada a sembrar", blank=True, null=True)
     area_sembrada = models.DecimalField('Area sembrada en MZ', max_digits=10, decimal_places=2, help_text="Introduzca el area sembrada en Manzana")
-    area_cosechada = models.DecimalField('Area cosechada en MZ', max_digits=10, decimal_places=2, help_text="Introduzca el area sembrada en Manzana")
+    area_cosechada = models.DecimalField('Area cosechada en MZ', max_digits=10, decimal_places=2, help_text="Introduzca el area cosechada en Manzana")
     produccion = models.DecimalField('Producción en QQ', max_digits=10, decimal_places=2, help_text="Introduzca la producción en Quintales")
 #    perdida = models.IntegerField(choices=PERDIDA_CHOICES)
     perdida = models.ForeignKey(Perdida)
@@ -81,8 +82,9 @@ class Postrera(models.Model):
     object_id = models.IntegerField(db_index=True)
     content_object = generic.GenericForeignKey()
     producto = models.ForeignKey(Producto)
+    planea_siembra = models.DecimalField('Area planificada a sembrar', max_digits=10, decimal_places=2, help_text="Introduzca el area planificada a sembrar", blank=True,null=True)
     area_sembrada = models.DecimalField('Area sembrada en MZ', max_digits=10, decimal_places=2, help_text="Introduzca el area sembrada en Manzana")
-    area_cosechada = models.DecimalField('Area cosechada en MZ', max_digits=10, decimal_places=2, help_text="Introduzca el area sembrada en Manzana")
+    area_cosechada = models.DecimalField('Area cosechada en MZ', max_digits=10, decimal_places=2, help_text="Introduzca el area cosechada en Manzana")
     produccion = models.DecimalField('Producción en QQ', max_digits=10, decimal_places=2, help_text="Introduzca la producción en Quintales")
     perdida = models.ForeignKey(Perdida)
     
@@ -98,8 +100,12 @@ class Apante(models.Model):
     object_id = models.IntegerField(db_index=True)
     content_object = generic.GenericForeignKey()
     producto = models.ForeignKey(Producto)
+    planea_siembra = models.DecimalField('Area planificada a sembrar', max_digits=10, decimal_places=2, help_text="Introduzca el area planificada a sembrar", blank=True, null=True)
     area_sembrada = models.DecimalField('Area a sembrar en MZ', max_digits=10, decimal_places=2, help_text="Introduzca el area sembrada en Manzana")
-    semilla = models.CharField('Tiene Semilla para siembra?', max_length=4,choices=SEMILLA_CHOICES, help_text="Tienen semilla para la siembra")
+#    semilla = models.CharField('Tiene Semilla para siembra?', max_length=4,choices=SEMILLA_CHOICES, help_text="Tienen semilla para la siembra")
+    area_cosechada = models.DecimalField('Area cosechada en MZ', max_digits=10, decimal_places=2,help_text="Introduzca el area cosechada en Manzana")
+    produccion = models.DecimalField('Producción en QQ', max_digits=10,decimal_places=2,help_text="Introduzca la producción en Quintales")
+    perdida = models.ForeignKey(Perdida)
     
     class Meta:
         verbose_name_plural="Sobre siembre de Apante"
@@ -125,7 +131,7 @@ class Disponibilidad(models.Model):
         verbose_name_plural = "Sobre la disponibilidad de alimentos"
 
 class Brazalete(models.Model):
-    estado = models.CharField(max_length=200)
+    estado = models.CharField(max_length=200, unique = True)
 
     def __unicode__(self):
         return self.estado
