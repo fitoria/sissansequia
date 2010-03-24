@@ -276,9 +276,17 @@ padding:0px
 }
 .lista_sidebar li{
 margin-left:0px;
-margin-bottom:5px;
+padding-top:8px;
+padding-bottom:5px;
 border-bottom:1px solid #474747;
 width:100%;
+height:25px;
+}
+.lista_sidebar li img{
+margin-right:5px;
+}
+.lista_sidebar li:hover{
+background:#3a3a3a;
 }
 .lista_sidebar li a{
 color:#000;
@@ -288,6 +296,35 @@ color:#fff;
 }
 .separador {
 	clear:both;
+}
+
+/* --------------Para el formulario de sequia-------------- */
+
+#id_municipio, #id_departamento, #id_fecha_inicio,#id_fecha_final, #id_comunidad, #id_entrevistado {
+width:200px;
+}
+
+#boton{
+margin-top:5px;
+width:200px;
+height:30px;
+background:#C9DB8F;
+font-weight:bold;
+color:#2f483a;
+}
+
+#mensaje{
+background:#5a9a6d;
+margin-top:0px;
+margin-left:5px;
+padding:5px;
+color:#fff;
+border-top-width:1px;
+border-top-color:#395c4a;
+border-top-style:solid;
+border-bottom-width:1px;
+border-bottom-color:#395c4a;
+border-bottom-style:solid;
 }
 
 /* --------------Esto no va por el momento-------------- */
@@ -305,7 +342,7 @@ color:#fff;
 #footer {
 	margin-top:15px;
 	width:960px;
-	height:236px;
+	height:40px;
 	margin-bottom:-8px;
 	!margin-bottom:0px;
 	color:#C4BFBF;

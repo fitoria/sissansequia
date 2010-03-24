@@ -56,8 +56,8 @@
                 <form action"." method="POST">
                 <fieldset>
                 <div id="formulario_tabla">
-                       <div class="form_label"><b>{{form.fecha_inicio.label}}</b></div>
-                       <div  class="datepicker">{{form.fecha_inicio}}</div>
+                       <div class="form_label "><b>{{form.fecha_inicio.label}}</b></div>
+                       <div  class="datepicker ">{{form.fecha_inicio}}</div>
                        <div class="form_label"><b>{{form.fecha_final.label}}</b></div>
                        <div class="datepicker">{{form.fecha_final}}</div>
                        <div id="general_form">
@@ -76,7 +76,7 @@
                 </fieldset>
                 </form>
 {%if mensaje%}
-                    <div id="mensaje">{{mensaje}}</div>
+                    <div id="mensaje">{{mensaje}} <img src="/imagen/flecha.png"></div>
 {%endif%}
 {% endblock %} 
 {%block columna_derecha%}
@@ -85,11 +85,11 @@
     <div id="b_enlace">
         <div class="lista_sidebar">
         <ul>
-            <li><a href="/sequia/index/">Formulario de Consulta</a></li>
-            <li><a href="/sequia/perdida/">Pérdida de cosecha</a></li>
-            <li><a href="/sequia/disponibilidad/">Disponibilidad de Alimentos</a></li>
-            <li><a href="/sequia/nutricion/">Nutrición</a></li>
-            <li><a href="/sequia/descargar/xls/">Exportar a Hoja de Cálculo</a></li>
+            <a href="/sequia/index/"><li><img class="izq" src="/imagen/filtroconsulta.png">Formulario de Consulta</li></a>
+            <a href="/sequia/perdida/"><li><img class="izq" src="/imagen/filtrocosecha.png">Pérdida de cosecha</li></a>
+            <a href="/sequia/disponibilidad/"><li><img class="izq" src="/imagen/filtroalimentos.png">Disponibilidad de Alimentos</li></a>
+            <a href="/sequia/nutricion/"><li><img class="izq" src="/imagen/filtronutricion.png">Nutrición</li></a>
+            <a href="/sequia/descargar/xls/"><li><img class="izq" src="/imagen/filtroexcell.png">Exportar a Hoja de Cálculo</li></a>
         </ul>
         </div>
     </div>

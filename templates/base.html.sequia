@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="/media/css/style.css" />
 	<script type="text/javascript" src="/media/js/jquery.js"></script>
 	<script type="text/javascript" src="/media/js/s3Slider.js"></script>
+	<script type="text/javascript" src="/media/js/niceforms.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function() {

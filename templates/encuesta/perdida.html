@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block contenido %}
 <div class="titulografo"><h2>Perdida de Primera, Postrera y Apante</h2></div>
-numeros de casos: {{casos}} familias   <div id="vergrafo" class="derecha"><a href="/perdida/grafos/">Ver Gráficos</a></div><br>
-
+numeros de casos: {{casos}} familias 
+<div id="tabs"><a href="/perdida/grafos/"><div class="boton-grafo">Ver Gráficos</div></a></div>
 <table>
 <caption>Tabla Perdida de Primera</caption>
 <thead>
@@ -152,11 +152,11 @@ numeros de casos: {{casos}} familias   <div id="vergrafo" class="derecha"><a hre
     <div id="b_enlace">
         <div class="lista_sidebar">
         <ul>
-            <li><a href="/sequia/index/">Formulario de Consulta</a></li>
-            <li><a href="/sequia/perdida/">Pérdida de cosecha</a></li>
-            <li><a href="/sequia/disponibilidad/">Disponibilidad de Alimentos</a></li>
-            <li><a href="/sequia/nutricion/">Nutrición</a></li>
-            <li><a href="/sequia/descargar/xls/">Exportar a Hoja de Cálculo</a></li>
+  <a href="/sequia/index/"><li><img class="izq" src="/imagen/filtroconsulta.png">Formulario de Consulta</li></a>
+            <a href="/sequia/perdida/"><li><img class="izq" src="/imagen/filtrocosecha.png">Pérdida de cosecha</li></a>
+            <a href="/sequia/disponibilidad/"><li><img class="izq" src="/imagen/filtroalimentos.png">Disponibilidad de Alimentos</li></a>
+            <a href="/sequia/nutricion/"><li><img class="izq" src="/imagen/filtronutricion.png">Nutrición</li></a>
+            <a href="/sequia/descargar/xls/"><li><img class="izq" src="/imagen/filtroexcell.png">Exportar a Hoja de Cálculo</li></a>
         </ul>
         </div>
     </div>
